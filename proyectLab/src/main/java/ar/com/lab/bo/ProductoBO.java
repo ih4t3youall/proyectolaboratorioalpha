@@ -1,5 +1,6 @@
 package ar.com.lab.bo;
 
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,14 +17,33 @@ public class ProductoBO {
 		productoDAO.saveProductos(productos);
 
 	}
-	
+
 	public void obtenerTodosLosProductosControlados() {
 
-		
 		productoDAO.getProductosControlados();
-		
+
 	}
 
+	public List<ProductoControl> obtenerProductosEnFecha(Date date) {
+
+		return productoDAO.getProductByDate(date);
+
+	}
+
+	public List<ProductoControl> obtenerControlProductosPorFecha(Date date) {
+
+		List<ProductoControl> controlProductsByDate = productoDAO
+				.getControlProductsByDate(date);
+		return controlProductsByDate;
+
+	}
+
+	public List<Date> obtenerDiasCargados() {
+
+		List<Date> usedDates = productoDAO.getUsedDates();
+		return usedDates;
+
+	}
 
 	public void eliminarProducto(Producto producto) {
 
@@ -40,7 +60,7 @@ public class ProductoBO {
 	}
 
 	public List<Producto> obtenerTodosLosProductos() {
-		
+
 		List<Producto> productos = productoDAO.getProductos();
 		return productos;
 	}
@@ -48,13 +68,12 @@ public class ProductoBO {
 	public void guardarProductoControl(
 			LinkedList<ProductoControl> listaProductoControl) {
 		productoDAO.saveListaProductoControl(listaProductoControl);
-		
+
 	}
 
 	public void modificarProductos(LinkedList<Producto> productosModificados) {
 		productoDAO.modifyProducts(productosModificados);
-		
+
 	}
 
-	
 }

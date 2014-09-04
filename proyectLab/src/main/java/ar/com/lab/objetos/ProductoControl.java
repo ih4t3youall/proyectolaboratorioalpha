@@ -1,5 +1,6 @@
 package ar.com.lab.objetos;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class ProductoControl {
@@ -9,7 +10,8 @@ public class ProductoControl {
 	private double medMedia;
 	private double medPeso;
 	private boolean error;
-	private Timestamp fecha;
+	private Date fecha;
+	private String hora;
 
 	public ProductoControl() {
 
@@ -22,6 +24,12 @@ public class ProductoControl {
 		this.medMedia = medMedia;
 		this.medPeso = medPeso;
 		this.error = error;
+	}
+	
+	@Override
+	public String toString(){
+		return producto.getNombre();
+		
 	}
 
 	public int getIdProductoControl() {
@@ -64,12 +72,20 @@ public class ProductoControl {
 		this.error = error;
 	}
 
-	public Timestamp getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Timestamp date) {
-		this.fecha = date;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 
 }

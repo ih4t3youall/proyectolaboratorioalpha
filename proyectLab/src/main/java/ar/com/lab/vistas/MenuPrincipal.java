@@ -25,12 +25,12 @@ public class MenuPrincipal extends JFrame {
 	
 	public void inicio(){
 		
-		JPanel panel = new JPanel();
-		UtilDateModel model = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
-		panel.add(datePicker);
-		add(panel);
+//		JPanel panel = new JPanel();
+//		UtilDateModel model = new UtilDateModel();
+//		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+//		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+//		panel.add(datePicker);
+//		add(panel);
 		
 		
 		setVisible(true);

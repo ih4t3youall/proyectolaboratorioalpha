@@ -1,7 +1,10 @@
 package ar.com.lab.vistas;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -20,7 +23,6 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.Rotation;
 
-import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 
 public class GeneradorGraficos extends JPanel {
@@ -46,9 +48,9 @@ public class GeneradorGraficos extends JPanel {
 	public ChartPanel crearGrafica(XYSeriesCollection dataset) {
 
 		final JFreeChart chart = ChartFactory.createXYLineChart(
-				"Tiempos de entrenamientos", "Vuelta", "Tiempo (segundos)",
+				"Table peso tiempo", "Vuelta", "unidades(cm/gr)",
 				dataset, PlotOrientation.VERTICAL, true, // uso de leyenda
-				false, // uso de tooltips
+				true, // uso de tooltips
 				false // uso de urls
 				);
 		// color de fondo de la gráfica
@@ -70,7 +72,15 @@ public class GeneradorGraficos extends JPanel {
 		// we put the chart into a panel
 		ChartPanel chartPanel = new ChartPanel(chart);
 		// default size
-		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		double height2 = screenSize.getHeight();
+		double width2 = screenSize.getWidth();
+		
+		Dimension dim = new Dimension();
+		dim.setSize(width2 -500,height2-500);
+		
+		chartPanel.setPreferredSize(dim);
 
 		return chartPanel;
 	}
@@ -93,7 +103,7 @@ public class GeneradorGraficos extends JPanel {
 	// rango entre 120 y 135)
 	private void configurarRangeAxis(NumberAxis rangeAxis) {
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		rangeAxis.setTickUnit(new NumberTickUnit(2));
+		rangeAxis.setTickUnit(new NumberTickUnit(20));
 		rangeAxis.setRange(120, 135);
 	}
 
@@ -126,21 +136,22 @@ public class GeneradorGraficos extends JPanel {
 
 	}
 
-	public XYSeries[] generarDatasetProyectedValues(
-			LinkedList<ProductoControl> productosControl) {
+	public XYSeriesCollection generarDatasetProyectedValues(
+			List<ProductoControl> productosControl) {
 		int contador = 0;
 		XYSeries seriePeso = new XYSeries("Peso");
 		XYSeries serieMedida = new XYSeries("Medida");
+		XYSeriesCollection collection = new XYSeriesCollection();
 		for (ProductoControl productoControl : productosControl) {
 			contador++;
 			seriePeso.add(contador, productoControl.getMedPeso());
 			serieMedida.add(contador, productoControl.getMedMedia());
-			final XYSeriesCollection collection = new XYSeriesCollection();
-			collection.addSeries(seriePeso);
-			collection.addSeries(serieMedida);
+			
+			
 		}
-		XYSeries[] series ={seriePeso,serieMedida};
-		return series;
+		collection.addSeries(seriePeso);
+		collection.addSeries(serieMedida);
+		return collection;
 		
 		
 	}

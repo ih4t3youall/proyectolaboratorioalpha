@@ -1,5 +1,6 @@
 package ar.com.lab.rowmapper;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,9 +20,9 @@ public class ProductoControlRowMapper implements RowMapper<ProductoControl> {
 		productoControl.setMedMedia(rs.getDouble("medMedia"));
 		productoControl.setMedPeso(rs.getDouble("medPeso"));
 		productoControl.setError(rs.getBoolean("error"));
-		productoControl.setFecha(rs.getTimestamp("fecha"));
-		
-		
+		productoControl.setFecha(rs.getDate("fecha"));
+		productoControl.setHora(rs.getString("hora"));
+
 		return productoControl;
 	}
 

@@ -49,7 +49,7 @@ public class ListenerCancelar implements ActionListener {
 		}
 		if(padre.equals("vistaModificar")){
 			VistaModificar vistaModificar = (VistaModificar) contexto;
-			vistaModificar.removeAll();
+			vistaModificar.removeAll(); 
 			menuPrincipal.remove(vistaModificar);
 			
 		}
