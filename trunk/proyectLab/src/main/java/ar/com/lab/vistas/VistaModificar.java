@@ -77,12 +77,12 @@ public class VistaModificar extends JPanel {
 		medMax.setText("0");
 		medMin.setText("0");
 
-		add(medMax);
 		add(medMin);
+		add(medMax);
 		add(new JLabel(""));
 		add(new JLabel("peso"));
-		add(pesoMax);
 		add(pesoMin);
+		add(pesoMax);
 		add(new JLabel(""));
 		add(new JLabel(""));
 
@@ -131,9 +131,9 @@ public class VistaModificar extends JPanel {
 					pesoMax.setEnabled(true);
 					pesoMin.setEnabled(true);
 					producto.getNombre();
-					medMax.setText(String.valueOf(producto.getMedMax()));
 					medMin.setText(String.valueOf(producto.getMedMin()));
-					pesoMax.setText(String.valueOf(producto.getPesoMax()));
+					medMax.setText(String.valueOf(producto.getMedMax()));
+					pesoMin.setText(String.valueOf(producto.getPesoMin()));
 					pesoMax.setText(String.valueOf(producto.getPesoMax()));
 				}
 

@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import ar.com.lab.config.ConfMenuBars;
-import ar.com.lab.vistas.GeneradorGraficos;
 import ar.com.lab.vistas.MenuPrincipal;
 import ar.com.lab.vistas.VistaAgregar;
 import ar.com.lab.vistas.VistaControlar;
@@ -18,9 +18,11 @@ public class ListenerArchivoMenuBar implements ActionListener {
 
 	String[] archivo = ConfMenuBars.ARCHIVO;
 	private MenuPrincipal menuPrincipal;
+	private JPanel panel;
 
 	public ListenerArchivoMenuBar(MenuPrincipal menuPrincipal) {
 		this.menuPrincipal = menuPrincipal;
+		panel = null;
 
 	}
 
@@ -30,29 +32,34 @@ public class ListenerArchivoMenuBar implements ActionListener {
 		JMenuItem menuItem = (JMenuItem) e.getSource();
 
 		String text = menuItem.getText();
+
+		if (panel != null) {
+
+			menuPrincipal.remove(panel);
+			
+		}
+
 		if (text.equals(archivo[0])) {
 			// agregar
-			new VistaAgregar();
-
+			panel = new VistaAgregar();
 		}
 		if (text.equals(archivo[1])) {
 
 			// controlar
-			new VistaControlar();
+			panel = new VistaControlar();
 		}
 		if (text.equals(archivo[2])) {
 			// eliminar
-			new VistaEliminar();
+			panel = new VistaEliminar();
 		}
 		if (text.equals(archivo[3])) {
 			// modificar
-			new VistaModificar();
+			panel = new VistaModificar();
 		}
 		if (text.equals(archivo[4])) {
 			// modificar
-			new VistaGraficos();
+			panel = new VistaGraficos();
 		}
-	
 
 	}
 
