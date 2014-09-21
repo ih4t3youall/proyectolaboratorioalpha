@@ -32,6 +32,15 @@ public class ProductoBO {
 		return productByDate;
 
 	}
+	
+	public List<ProductoControl> getProductosEnFecha(Date fecha,
+			ProductoControl producto) {
+	
+		return productoDAO.getProductsInADate(fecha,producto);
+		
+		
+	}
+	
 
 	public List<ProductoControl> obtenerControlProductosPorFecha(Date fechaInicial,Date fechaFinal,Producto producto) {
 
@@ -78,5 +87,7 @@ public class ProductoBO {
 		productoDAO.modifyProducts(productosModificados);
 
 	}
+
+
 
 }

@@ -6,12 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import ar.com.lab.vistas.VistaControlar;
+import ar.com.lab.vistas.VistaExcel;
 
 public class ListenerGenerico implements ActionListener {
 
-	private VistaControlar vista;
+	private VistaExcel vista;
 	
-	public ListenerGenerico(VistaControlar vistaAgregar) {
+	public ListenerGenerico(VistaExcel vistaAgregar) {
 		this.vista = vistaAgregar;
 	}
 
