@@ -88,6 +88,7 @@ public class VistaModificar extends JPanel {
 
 		add(new JLabel(""));
 		add(new JLabel(""));
+		add(new JLabel(""));
 		setVisible(true);
 		
 		add(aceptar);
@@ -106,6 +107,7 @@ public class VistaModificar extends JPanel {
 				String showInputDialog = JOptionPane.showInputDialog("Ingrese nuevo nombre.");
 				((Producto)(productos.getSelectedItem())).setNombre(showInputDialog);
 				productos.revalidate();
+				productos.repaint();
 				
 				
 			}
@@ -159,6 +161,9 @@ public class VistaModificar extends JPanel {
 				}
 				
 				productoBO.modificarProductos(productosModificados);
+				
+				JOptionPane.showMessageDialog(null, "El producto ah sido modificado");
+				
 				
 			}
 		});

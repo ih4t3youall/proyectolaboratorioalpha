@@ -69,6 +69,14 @@
 		</dependency>
 
 
+		<!-- apache poi excel -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11-beta2</version>
+		</dependency>
+
+
 
 	</dependencies>
 </project>

@@ -13,13 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.springframework.util.comparator.InvertibleComparator;
-
 import ar.com.lab.helpers.SoloNumeros;
-import ar.com.lab.listeners.ListenerFinalizarCarga;
 import ar.com.lab.listeners.ListenerAceptarProductoNuevo;
 import ar.com.lab.listeners.ListenerCancelar;
-import ar.com.lab.listeners.ListenerGenerico;
+import ar.com.lab.listeners.ListenerFinalizarCarga;
+import ar.com.lab.listeners.ListenerFocusTextField;
 import ar.com.lab.objetos.Producto;
 import ar.com.lab.spring.SpringContext;
 
@@ -37,17 +35,12 @@ public class VistaAgregar extends JPanel {
 	private JButton finalizar = new JButton("Finalizar");
 	private JButton cancelar = new JButton("Cancelar");
 	private JButton agregar = new JButton("+");
-	private JCheckBox checkPeso = new JCheckBox();
-	private JCheckBox checkMed = new JCheckBox();
 	private LinkedList<Producto> productos = new LinkedList<Producto>();
 
 	public VistaAgregar() {
 		setName("vistaAgregar");
 		setLayout(new GridLayout(4, 4));
-
-		invertMed();
-		invertPeso();
-
+		
 		add(new JLabel("Nombre"));
 		add(nombre);
 		add(new JLabel());
@@ -63,14 +56,22 @@ public class VistaAgregar extends JPanel {
 		pesoMin.setText("0");
 		medMax.setText("0");
 		medMin.setText("0");
+		
+		ListenerFocusTextField listenerFocus = new ListenerFocusTextField();
+		pesoMax.addFocusListener(listenerFocus);
+		pesoMin.addFocusListener(listenerFocus);
+		medMax.addFocusListener(listenerFocus);
+		medMin.addFocusListener(listenerFocus);
 
 		add(medMin);
 		add(medMax);
-		add(checkMed);
+//		add(checkMed);
+		add(new JLabel(""));
 		add(new JLabel("peso"));
 		add(pesoMin);
 		add(pesoMax);
-		add(checkPeso);
+//		add(checkPeso);
+		add(new JLabel(""));
 		add(agregar);
 
 		add(finalizar);
@@ -87,24 +88,9 @@ public class VistaAgregar extends JPanel {
 		finalizar.addActionListener(new ListenerFinalizarCarga(this));
 		cancelar.addActionListener(new ListenerCancelar(this));
 
-		checkMed.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				invertMed();
-
-			}
-		});
-
-		checkPeso.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				invertPeso();
-
-			}
-		});
-
+		createKeyListeners();
+		
 	}
 
 	public Producto getProducto() {
@@ -129,85 +115,70 @@ public class VistaAgregar extends JPanel {
 
 	}
 
-	protected void invertMed() {
-
-		medMax.setEnabled(!medMax.isEnabled());
-		medMin.setEnabled(!medMin.isEnabled());
-
-		if (checkMed.isSelected()) {
-
-			medMin.setText("");
-			medMax.setText("");
-			medMax.requestFocus();
-
-		} else {
-			medMin.setText("0");
-			medMax.setText("0");
-
-		}
-
-	}
-
-	protected void invertPeso() {
-		pesoMax.setEnabled(!pesoMax.isEnabled());
-		pesoMin.setEnabled(!pesoMin.isEnabled());
-
-		if (checkPeso.isSelected()) {
-
-			pesoMin.setText("");
-			pesoMax.setText("");
-			pesoMax.requestFocus();
-
-		} else {
-
-			pesoMin.setText("0");
-			pesoMax.setText("0");
-
-		}
-
-	}
 
 	public void reset() {
 		nombre.setText("");
 		medMax.setText("0");
-		medMax.setEnabled(false);
 		medMin.setText("0");
-		medMin.setEnabled(false);
 		pesoMax.setText("0");
-		pesoMax.setEnabled(false);
 		pesoMin.setText("0");
-		pesoMin.setEnabled(false);
-		checkMed.setSelected(false);
-		checkPeso.setSelected(false);
 
 	}
 
 	private void createKeyListeners(){
 		
-		nombre.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-
-				int keyCode = e.getKeyCode();
-				
-				
-				
-			}
-		});
+	pesoMax.addKeyListener(new KeyListener() {
 		
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			addlista(getProducto());
+			reset();
+			nombre.requestFocus();
+			}
+			
+		}
+	});
+		
+	medMax.addKeyListener(new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				addlista(getProducto());
+				reset();
+				nombre.requestFocus();
+				}
+		}
+	});
+	
+	
 		
 	}
 	

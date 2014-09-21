@@ -28,7 +28,8 @@ public class VistaGraficos extends JPanel {
 	
 
 	private JComboBox<String> seleccionarGrafico;
-	private JComboBox<Date> seleccionarFecha;
+	private JComboBox<Date> seleccionarFechaInicial;
+	private JComboBox<Date> seleccionarFechaFinal;
 	private JComboBox<ProductoControl> seleccionarProducto;
 	private JButton aceptar, cancelar;
 
@@ -38,50 +39,69 @@ public class VistaGraficos extends JPanel {
 		
 		setLayout(new FlowLayout());
 		List<Date> obtenerDiasCargados = productoBO.obtenerDiasCargados();
-		
-		seleccionarFecha = new JComboBox<Date>();
-		seleccionarFecha.addItem(null);
-		
-		for (Date date : obtenerDiasCargados) {
-			seleccionarFecha.addItem(date);
-						
-		}
-		
+		 List<ProductoControl> obtenerTodosLosProductosControlados = productoBO.obtenerTodosLosProductosControlados();
+		seleccionarFechaInicial = new JComboBox<Date>();
+		seleccionarFechaFinal = new JComboBox<Date>();
+		seleccionarFechaInicial.addItem(null);
+		seleccionarFechaFinal.addItem(null);
 		
 		seleccionarGrafico = new JComboBox<String>();
 		seleccionarProducto = new JComboBox<ProductoControl>();
+		
+		for (Date date : obtenerDiasCargados) {
+			seleccionarFechaInicial.addItem(date);
+			seleccionarFechaFinal.addItem(date);
+						
+		}
+		
+		for (ProductoControl producto : obtenerTodosLosProductosControlados) {
+			seleccionarProducto.addItem(producto);
+			
+			
+		}
+		
+		
+		
+
 		seleccionarGrafico.addItem("Lineas");
 
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		add(new JLabel("Tipo de grafico"));
 		add(seleccionarGrafico);
-		add(seleccionarFecha);
+		add(seleccionarFechaInicial);
+		add(seleccionarFechaFinal);
 		seleccionarProducto.setEnabled(false);
 		add(seleccionarProducto);
 		
 		aceptar.setEnabled(false);
 		add(aceptar);
 		add(cancelar);
-		seleccionarFecha.addActionListener(new ActionListener() {
+		seleccionarFechaInicial.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if(seleccionarFecha.getSelectedIndex() == -1){
+				if(seleccionarFechaInicial.getSelectedIndex() == -1){
 					aceptar.setEnabled(false);
 				}else {
 					
 					aceptar.setEnabled(true);
-					Date date = (Date)seleccionarFecha.getSelectedItem();
+					Date date = (Date)seleccionarFechaInicial.getSelectedItem();
 					  List<ProductoControl> productos = productoBO.obtenerProductosEnFecha(date);
+					  seleccionarProducto.removeAllItems();
 					for (ProductoControl control : productos) {
 						seleccionarProducto.addItem(control);
+						System.out.println(control.getProducto().getNombre());
 						
 					}
 					seleccionarProducto.setEnabled(true);
+					seleccionarProducto.updateUI();
 					seleccionarProducto.repaint();
 					seleccionarProducto.revalidate();
+					repaint();
+					revalidate();
+					
 				}
 				
 			}
@@ -106,11 +126,15 @@ public class VistaGraficos extends JPanel {
 	public JComboBox<String> getSeleccionarGrafico() {
 		return seleccionarGrafico;
 	}
-	public JComboBox<Date>  getSeleccionarFecha() {
-		return seleccionarFecha;
+	public JComboBox<Date>  getSeleccionarFechaInicial() {
+		return seleccionarFechaInicial;
 	}
-
-	
+	public JComboBox<Date>  getSeleccionarFechaFinal() {
+		return seleccionarFechaFinal;
+	}
+	public JComboBox<ProductoControl>  getSeleccionarproducto() {
+		return seleccionarProducto;
+	}
 	
 
 }
