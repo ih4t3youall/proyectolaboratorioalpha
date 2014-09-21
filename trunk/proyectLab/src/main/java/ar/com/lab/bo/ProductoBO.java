@@ -18,22 +18,25 @@ public class ProductoBO {
 
 	}
 
-	public void obtenerTodosLosProductosControlados() {
+	public List<ProductoControl> obtenerTodosLosProductosControlados() {
 
-		productoDAO.getProductosControlados();
+		return productoDAO.getProductosControlados();
 
 	}
 
 	public List<ProductoControl> obtenerProductosEnFecha(Date date) {
 
-		return productoDAO.getProductByDate(date);
+		List<ProductoControl> productByDate = productoDAO.getProductNameByDate(date);
+		
+		
+		return productByDate;
 
 	}
 
-	public List<ProductoControl> obtenerControlProductosPorFecha(Date date) {
+	public List<ProductoControl> obtenerControlProductosPorFecha(Date fechaInicial,Date fechaFinal,Producto producto) {
 
-		List<ProductoControl> controlProductsByDate = productoDAO
-				.getControlProductsByDate(date);
+				List<ProductoControl> controlProductsByDate = productoDAO.getControlProductsByDate(fechaInicial,fechaFinal,producto);
+				productoDAO.populateProductoControl(controlProductsByDate);
 		return controlProductsByDate;
 
 	}

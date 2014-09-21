@@ -12,6 +12,7 @@ import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.rowmapper.DateRowMapper;
 import ar.com.lab.rowmapper.ProductoControlRowMapper;
+import ar.com.lab.rowmapper.ProductoControlSolIntRowMapper;
 import ar.com.lab.rowmapper.ProductoRowMapper;
 
 public class ProductoDAO {
@@ -79,36 +80,59 @@ public class ProductoDAO {
 
 	}
 	
-	public void getProductosControlados() {
-		String sql = "select * from producto_control;";
+	public List<ProductoControl> getProductosControlados() {
+		String sql = "select * from producto_control";
 		List<ProductoControl> query = jdbcTemplate.query(sql,
 				new ProductoControlRowMapper());
 
-		for (ProductoControl productoControl : query) {
-
-			String sqlpProducto = "select * from producto where idProducto = ?;";
-			Producto queryProducto = jdbcTemplate.queryForObject(sql,
-					new Object[] { productoControl.getProducto().getIdProducto() }, new ProductoRowMapper());
-			productoControl.setProducto(queryProducto);
-
-		}
+		populateProductoControl(query);
+		return query;
 
 	}
 	
 	
-	public List<ProductoControl> getControlProductsByDate(java.util.Date date) {
 	
-				String sql = "select * from producto_control where fecha = ?";
-				List<ProductoControl> query = jdbcTemplate.query(sql,new Object[]{date}, new ProductoControlRowMapper());
-				return query;
+	public void populateProductoControl(List<ProductoControl> query){
+		
+		for (ProductoControl productoControl : query) {
+			try{
+			String sqlpProducto = "select * from producto where idProducto = ?";
+			Producto queryProducto = jdbcTemplate.queryForObject(sqlpProducto,
+					new Object[] { productoControl.getProducto().getIdProducto() }, new ProductoRowMapper());
+			productoControl.setProducto(queryProducto);
+			}catch (org.springframework.dao.EmptyResultDataAccessException e){
+				e.printStackTrace();
+			}
+
+		}
 		
 	}
 	
 	
-	public List<ProductoControl> getProductByDate(Date date) {
-	String sql = "select * from producto_control where fecha = ?";
-	List<ProductoControl> query = jdbcTemplate.query(sql, new Object[]{date},new ProductoControlRowMapper());
-	return query;
+	public List<ProductoControl> getControlProductsByDate(java.util.Date fechaInicial,java.util.Date fechaFinal,Producto producto) {
+	
+			String sql = "select * from producto_control where fecha between ? and ?  and idProducto=?";
+			List<ProductoControl> query = jdbcTemplate.query(sql,new Object[]{fechaInicial.toString(),fechaFinal.toString(),producto.getIdProducto()}, new ProductoControlRowMapper());
+			return query;
+	}
+	
+	
+	public List<ProductoControl> getProductNameByDate(Date date) {
+
+		String sql = "select  distinct idProducto from  producto_control where fecha = ?";
+		List<ProductoControl> query = jdbcTemplate.query(sql,new Object[]{date.toString()}, new ProductoControlSolIntRowMapper());
+		
+		
+		
+		
+		populateProductoControl(query);
+		
+		for (ProductoControl productoControl : query) {
+			System.out.println(productoControl.getProducto().getNombre());
+		}
+	
+		
+		return query;
 		
 	}
 

@@ -23,6 +23,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.Rotation;
 
+import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 
 public class GeneradorGraficos extends JPanel {
@@ -137,20 +138,122 @@ public class GeneradorGraficos extends JPanel {
 	}
 
 	public XYSeriesCollection generarDatasetProyectedValues(
-			List<ProductoControl> productosControl) {
-		int contador = 0;
-		XYSeries seriePeso = new XYSeries("Peso");
-		XYSeries serieMedida = new XYSeries("Medida");
-		XYSeriesCollection collection = new XYSeriesCollection();
-		for (ProductoControl productoControl : productosControl) {
-			contador++;
-			seriePeso.add(contador, productoControl.getMedPeso());
-			serieMedida.add(contador, productoControl.getMedMedia());
+			List<ProductoControl> productosControl,int tipo) {
+		
+		
+		XYSeriesCollection collection=null;
+		if(tipo == 0){
+
+			//solo grafica medidas
+			
+			XYSeries serieMedida = new XYSeries("Medida");
+			int contador = 0;
+			for (ProductoControl productoControl : productosControl) {
+				serieMedida.add(contador, productoControl.getMedMedia());
+				contador++;
+				
+				
+			}
+			Producto producto = productosControl.get(0).getProducto();
+			
+			XYSeries serieMedidaMaxima = new XYSeries("Medida Maxima");
+			XYSeries serieMedidaMinima = new XYSeries("Medida Minima");
+			
+			for (int i = 0; i < contador; i++) {
+				
+				serieMedidaMaxima.add(i,producto.getMedMax());
+				serieMedidaMinima.add(i,producto.getMedMin());
+				
+				
+			}
+			
+			 collection = new XYSeriesCollection();
+			 collection.addSeries(serieMedida);
+			 collection.addSeries(serieMedidaMaxima);
+			 collection.addSeries(serieMedidaMinima);
 			
 			
 		}
-		collection.addSeries(seriePeso);
-		collection.addSeries(serieMedida);
+		
+		if (tipo == 1){
+			
+	//solo grafica peso
+			
+			XYSeries serieMedida = new XYSeries("Peso");
+			int contador = 0;
+			for (ProductoControl productoControl : productosControl) {
+				serieMedida.add(contador, productoControl.getMedPeso());
+				contador++;
+				
+				
+			}
+			Producto producto = productosControl.get(0).getProducto();
+			
+			XYSeries serieMedidaMaxima = new XYSeries("Peso Maxima");
+			XYSeries serieMedidaMinima = new XYSeries("Peso Minima");
+			
+			for (int i = 0; i < contador; i++) {
+				
+				serieMedidaMaxima.add(i,producto.getPesoMax());
+				serieMedidaMinima.add(i,producto.getPesoMin());
+				
+				
+			}
+			
+			 collection = new XYSeriesCollection();
+			 collection.addSeries(serieMedida);
+			 collection.addSeries(serieMedidaMaxima);
+			 collection.addSeries(serieMedidaMinima);
+			
+			
+		}
+		
+		
+		if (tipo == 3){
+			
+			XYSeries serieMedida = new XYSeries("Medida");
+			int contador = 0;
+			for (ProductoControl productoControl : productosControl) {
+				serieMedida.add(contador, productoControl.getMedMedia());
+				contador++;
+				
+				
+			}
+			Producto producto = productosControl.get(0).getProducto();
+			
+			XYSeries serieMedidaMaxima = new XYSeries("Medida Maxima");
+			XYSeries serieMedidaMinima = new XYSeries("Medida Minima");
+			
+			for (int i = 0; i < contador; i++) {
+				
+				serieMedidaMaxima.add(i,producto.getMedMax());
+				serieMedidaMinima.add(i,producto.getMedMin());
+				
+				
+			}
+			
+			 collection = new XYSeriesCollection();
+			 collection.addSeries(serieMedida);
+			 collection.addSeries(serieMedidaMaxima);
+			 collection.addSeries(serieMedidaMinima);
+			
+			
+		} 
+		
+		
+//		int contador = 0;
+//		XYSeries seriePeso = new XYSeries("Peso");
+//		XYSeries serieMedida = new XYSeries("Medida");
+//		XYSeriesCollection collection = new XYSeriesCollection();
+//		for (ProductoControl productoControl : productosControl) {
+//			contador++;
+//			seriePeso.add(contador, productoControl.getMedPeso());
+//			serieMedida.add(contador, productoControl.getMedMedia());
+//			
+//			
+//		}
+//		collection.addSeries(seriePeso);
+//		collection.addSeries(serieMedida);
 		return collection;
 		
 		
