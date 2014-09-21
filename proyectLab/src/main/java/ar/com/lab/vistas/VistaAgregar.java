@@ -40,7 +40,7 @@ public class VistaAgregar extends JPanel {
 	public VistaAgregar() {
 		setName("vistaAgregar");
 		setLayout(new GridLayout(4, 4));
-		
+
 		add(new JLabel("Nombre"));
 		add(nombre);
 		add(new JLabel());
@@ -56,7 +56,7 @@ public class VistaAgregar extends JPanel {
 		pesoMin.setText("0");
 		medMax.setText("0");
 		medMin.setText("0");
-		
+
 		ListenerFocusTextField listenerFocus = new ListenerFocusTextField();
 		pesoMax.addFocusListener(listenerFocus);
 		pesoMin.addFocusListener(listenerFocus);
@@ -65,41 +65,48 @@ public class VistaAgregar extends JPanel {
 
 		add(medMin);
 		add(medMax);
-//		add(checkMed);
+		// add(checkMed);
 		add(new JLabel(""));
 		add(new JLabel("peso"));
 		add(pesoMin);
 		add(pesoMax);
-//		add(checkPeso);
+		// add(checkPeso);
 		add(new JLabel(""));
 		add(agregar);
 
 		add(finalizar);
 		add(cancelar);
 		setVisible(true);
-		
+
 		menuPrincipal.add(this);
 		menuPrincipal.setResizable(false);
 		menuPrincipal.setSize(531, 140);
 		menuPrincipal.repaint();
 		menuPrincipal.revalidate();
-		
+
 		agregar.addActionListener(new ListenerAceptarProductoNuevo(this));
 		finalizar.addActionListener(new ListenerFinalizarCarga(this));
 		cancelar.addActionListener(new ListenerCancelar(this));
 
-
 		createKeyListeners();
-		
+
 	}
 
 	public Producto getProducto() {
 
+		String pesoMaximo = pesoMax.getText().equals("") ? "0" : pesoMax
+				.getText();
+		String pesoMinimo = pesoMin.getText().equals("") ? "0" : pesoMin
+				.getText();
+		String medidaMaxima = medMax.getText().equals("") ? "0" : medMax
+				.getText();
+		String medidaMinima = medMin.getText().equals("") ? "0" : medMin
+				.getText();
+
 		Producto producto = new Producto(nombre.getText(),
-				Double.parseDouble(pesoMax.getText()),
-				Double.parseDouble(pesoMin.getText()),
-				Double.parseDouble(medMax.getText()), Double.parseDouble(medMin
-						.getText()));
+				Double.parseDouble(pesoMaximo), Double.parseDouble(pesoMinimo),
+				Double.parseDouble(medidaMaxima),
+				Double.parseDouble(medidaMinima));
 
 		return producto;
 	}
@@ -115,7 +122,6 @@ public class VistaAgregar extends JPanel {
 
 	}
 
-
 	public void reset() {
 		nombre.setText("");
 		medMax.setText("0");
@@ -125,61 +131,59 @@ public class VistaAgregar extends JPanel {
 
 	}
 
-	private void createKeyListeners(){
-		
-	pesoMax.addKeyListener(new KeyListener() {
-		
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void keyPressed(KeyEvent e) {
-			
-			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			addlista(getProducto());
-			reset();
-			nombre.requestFocus();
+	private void createKeyListeners() {
+
+		pesoMax.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
 			}
-			
-		}
-	});
-		
-	medMax.addKeyListener(new KeyListener() {
-		
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void keyPressed(KeyEvent e) {
-			
-			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				addlista(getProducto());
-				reset();
-				nombre.requestFocus();
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					addlista(getProducto());
+					reset();
+					nombre.requestFocus();
 				}
-		}
-	});
-	
-	
-		
+
+			}
+		});
+
+		medMax.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					addlista(getProducto());
+					reset();
+					nombre.requestFocus();
+				}
+			}
+		});
+
 	}
-	
+
 }

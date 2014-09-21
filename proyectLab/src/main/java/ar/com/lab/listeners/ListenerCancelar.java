@@ -10,6 +10,7 @@ import ar.com.lab.vistas.MenuPrincipal;
 import ar.com.lab.vistas.VistaAgregar;
 import ar.com.lab.vistas.VistaControlar;
 import ar.com.lab.vistas.VistaEliminar;
+import ar.com.lab.vistas.VistaExcel;
 import ar.com.lab.vistas.VistaGraficos;
 import ar.com.lab.vistas.VistaModificar;
 
@@ -59,6 +60,14 @@ public class ListenerCancelar implements ActionListener {
 			menuPrincipal.remove(vistaGraficos);
 			
 		}
+		
+		if(padre.equals("VistaExcel")){
+			VistaExcel vistaExcel = (VistaExcel) contexto;
+			vistaExcel.removeAll();
+			menuPrincipal.remove(vistaExcel);
+			
+		}
+		
 		
 
 		menuPrincipal.repaint();

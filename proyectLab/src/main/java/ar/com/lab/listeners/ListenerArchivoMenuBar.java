@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import ar.com.lab.config.ConfMenuBars;
@@ -11,6 +12,7 @@ import ar.com.lab.vistas.MenuPrincipal;
 import ar.com.lab.vistas.VistaAgregar;
 import ar.com.lab.vistas.VistaControlar;
 import ar.com.lab.vistas.VistaEliminar;
+import ar.com.lab.vistas.VistaExcel;
 import ar.com.lab.vistas.VistaGraficos;
 import ar.com.lab.vistas.VistaModificar;
 
@@ -59,6 +61,11 @@ public class ListenerArchivoMenuBar implements ActionListener {
 		if (text.equals(archivo[4])) {
 			// modificar
 			panel = new VistaGraficos();
+		}
+		if (text.equals(archivo[5])) {
+			//excel
+			panel = new VistaExcel();
+			
 		}
 
 	}
