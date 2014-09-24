@@ -1,11 +1,10 @@
 package ar.com.lab.vistas;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import javax.swing.JFrame;
+
 import ar.com.objetos.BarraMenu;
 
 public class MenuPrincipal extends JFrame {
@@ -33,8 +32,15 @@ public class MenuPrincipal extends JFrame {
 //		add(panel);
 		
 		
-		setVisible(true);
+//		setVisible(true);
 		setSize(400,400);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double height = screenSize.getHeight();
+		double width = screenSize.getWidth();
+		height = (height/2)-(400/2);
+		width= (width/2) -(400/2);
+		setLocation((int) width,(int)height);
 		
 	}
 	
