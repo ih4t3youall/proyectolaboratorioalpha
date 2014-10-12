@@ -24,7 +24,9 @@ public class PantallaCargando extends JWindow {
 	}
 
 	public void dibujaVentana() {
+		if(imageIcon != null)
 		imageLabel.setIcon(imageIcon);
+		
 		this.getContentPane().setLayout(borderLayout1);
 		southPanel.setLayout(southPanelFlowLayout);
 		southPanel.setBackground(Color.WHITE);
