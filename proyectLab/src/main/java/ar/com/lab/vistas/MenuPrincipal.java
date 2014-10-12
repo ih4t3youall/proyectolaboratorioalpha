@@ -33,6 +33,7 @@ public class MenuPrincipal extends JFrame {
 		
 		
 //		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(400,400);
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

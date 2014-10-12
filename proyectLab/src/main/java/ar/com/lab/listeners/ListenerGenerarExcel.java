@@ -50,7 +50,7 @@ public class ListenerGenerarExcel implements ActionListener {
 		jfc.showSaveDialog(null);	
 		
 		File archivoXLS = jfc.getSelectedFile();
-		
+		archivoXLS = new File(archivoXLS.getAbsolutePath()+".xls");
 		try {
 			archivoXLS.createNewFile();
 		} catch (IOException e1) {
