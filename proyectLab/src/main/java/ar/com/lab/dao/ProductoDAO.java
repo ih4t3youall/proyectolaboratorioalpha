@@ -141,12 +141,12 @@ public class ProductoDAO {
 
 	}
 
-	public List<ProductoControl> getProductsInADate(Date fecha,
-			ProductoControl producto) {
+	public List<ProductoControl> getProductsInADate(Date fechaInicial,Date fechaFinal,
+			Producto producto) {
 
-		String sql = "select * from producto_control where fecha = ? and idProducto = ?";
+		String sql = "select * from producto_control where fecha between ? and ? and idProducto = ?";
 		List<ProductoControl> query = jdbcTemplate.query(sql, new Object[] {
-				fecha.toString(), producto.getProducto().getIdProducto() },
+				fechaInicial.toString(),fechaFinal.toString(), producto.getIdProducto() },
 				new ProductoControlRowMapper());
 		populateProductoControl(query);
 		return query;

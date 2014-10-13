@@ -1,7 +1,11 @@
 package ar.com.objetos;
 
-public class ResultadoCarga {
+import java.text.DecimalFormat;
 
+public class ResultadoCarga {
+	String nombreProducto = "";
+	double maximoEstablecido = 0;
+	double minimoEstablecido = 0;
 	double pesoMaximo = 0;
 	double pesoMinimo = 9999999;
 	double medidaMaxima = 0;
@@ -9,6 +13,30 @@ public class ResultadoCarga {
 	double diferencia = 0;
 	double error = 0;
 	int cantidadDeMuestras = 0;
+
+	public String getNombreProducto() {
+		return nombreProducto;
+	}
+
+	public void setNombreProducto(String nombreProducto) {
+		this.nombreProducto = nombreProducto;
+	}
+
+	public double getMaximoEstablecido() {
+		return maximoEstablecido;
+	}
+
+	public void setMaximoEstablecido(double maximoEstablecido) {
+		this.maximoEstablecido = maximoEstablecido;
+	}
+
+	public double getMinimoEstablecido() {
+		return minimoEstablecido;
+	}
+
+	public void setMinimoEstablecido(double minimoEstablecido) {
+		this.minimoEstablecido = minimoEstablecido;
+	}
 
 	public int getCantidadDeMuestras() {
 		return cantidadDeMuestras;
@@ -69,26 +97,35 @@ public class ResultadoCarga {
 	public String getText() {
 
 		String respuesta = "";
+		respuesta +="Nombre Producto: "+nombreProducto+"\n";
+		respuesta +="Maximo establecido: "+maximoEstablecido+"\n";
+		respuesta +="Minimo establecido: "+minimoEstablecido+"\n";
 		
-		respuesta += "Las muestas son :"+cantidadDeMuestras +" \n";
-		
+		 respuesta += "Las muestas son :" + cantidadDeMuestras
+				+ " \n";
+
 		if (pesoMaximo > 0) {
 			respuesta += "El peso maximo registrado fue de " + pesoMaximo
-					+ ", y el peso minimo " + pesoMinimo+"\n";
+					+ ", y el peso minimo " + pesoMinimo + "\n";
 
 		}
 
 		if (medidaMaxima > 0) {
 			respuesta += "La media maxima registrada fue de " + medidaMaxima
-					+ ", y la medida minima fue de " + medidaMinima +"\n";
+					+ ", y la medida minima fue de " + medidaMinima + "\n";
 
 		}
+		Double tazaError =(error * 100) / cantidadDeMuestras;
 		
-		double tazaError =(error*100)/cantidadDeMuestras;
+
+		DecimalFormat df = new DecimalFormat("0.00"); 
+		String format = df.format(tazaError);
 		
-		respuesta +="La taza de error fue de un "+tazaError+"%";
+
 		
 		
+		respuesta += "La taza de error fue de un " + format + "%";
+
 		return respuesta;
 
 	}

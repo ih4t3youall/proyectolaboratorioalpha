@@ -5,14 +5,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import ar.com.lab.vistas.VistaControlar;
-import ar.com.lab.vistas.VistaExcel;
+import ar.com.lab.vistas.VistaResultadoCarga;
 
 public class ListenerGenerico implements ActionListener {
 
-	private VistaExcel vista;
+	private VistaResultadoCarga vista;
 	
-	public ListenerGenerico(VistaExcel vistaAgregar) {
+	public ListenerGenerico(VistaResultadoCarga vistaAgregar) {
 		this.vista = vistaAgregar;
 	}
 

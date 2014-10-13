@@ -31,6 +31,7 @@ public class ListenerFinalizarCarga implements ActionListener {
 		productoBO.guardarListaProductos(productos);
 		JOptionPane.showMessageDialog(null,
 				"Se han agregado " + productos.size() + " productos.");
+		productos.clear();
 
 	}
 
