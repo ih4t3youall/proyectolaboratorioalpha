@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ar.com.lab.exceptions.CampoInvalidoExeption;
 import ar.com.lab.helpers.SoloNumeros;
 import ar.com.lab.listeners.ListenerAceptarProductoNuevo;
 import ar.com.lab.listeners.ListenerCancelar;
@@ -39,11 +40,15 @@ public class VistaAgregar extends JPanel {
 
 	public VistaAgregar() {
 		setName("vistaAgregar");
-		setLayout(new GridLayout(4, 4));
+		setLayout(new GridLayout(5, 4));
 
 		add(new JLabel("Nombre"));
 		add(nombre);
 		add(new JLabel());
+		add(new JLabel());
+		add(new JLabel());
+		add(new JLabel("Minimo"));
+		add(new JLabel("Maximo"));
 		add(new JLabel());
 		add(new JLabel("Medidas"));
 
@@ -131,6 +136,29 @@ public class VistaAgregar extends JPanel {
 
 	}
 
+	private void controlar() throws CampoInvalidoExeption {
+
+		if (nombre.getText().trim().equals("")) {
+			throw new CampoInvalidoExeption("Debe completar el nombre");
+		}
+
+		Double medMaxAux = Double.parseDouble(medMax.getText());
+		Double medMinAux = Double.parseDouble(medMin.getText());
+		Double pesoMaxAux = Double.parseDouble(pesoMax.getText());
+		Double pesoMinAux = Double.parseDouble(pesoMin.getText());
+
+		if (medMinAux > medMaxAux) {
+			throw new CampoInvalidoExeption(
+					"La medida minima es mas grande que la maxima.");
+		}
+
+		if (pesoMinAux > pesoMaxAux) {
+			throw new CampoInvalidoExeption(
+					"El peso minimo es mas grande que el maximo.");
+		}
+
+	}
+
 	private void createKeyListeners() {
 
 		pesoMax.addKeyListener(new KeyListener() {
@@ -151,12 +179,20 @@ public class VistaAgregar extends JPanel {
 			public void keyPressed(KeyEvent e) {
 
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					addlista(getProducto());
-					reset();
-					nombre.requestFocus();
+					try {
+
+						controlar();
+
+						addlista(getProducto());
+						reset();
+						nombre.requestFocus();
+					} catch (CampoInvalidoExeption e1) {
+
+					}
 				}
 
 			}
+
 		});
 
 		medMax.addKeyListener(new KeyListener() {
@@ -175,11 +211,16 @@ public class VistaAgregar extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
+				try {
+					
+					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+						controlar();
+						addlista(getProducto());
+						reset();
+						nombre.requestFocus();
+					}
+				} catch (CampoInvalidoExeption e1) {
 
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					addlista(getProducto());
-					reset();
-					nombre.requestFocus();
 				}
 			}
 		});

@@ -54,7 +54,7 @@ public class ListenerFinalizarControl implements ActionListener {
 				
 			}
 			
-			if(productoControl.getMedPeso() > medidaMaxima){
+			if(productoControl.getMedMedia() > medidaMaxima){
 				medidaMaxima = productoControl.getMedMedia();
 				
 			}
@@ -88,6 +88,11 @@ public class ListenerFinalizarControl implements ActionListener {
 		resultado.setPesoMaximo(pesoMaximo);
 		resultado.setPesoMinimo(pesoMinimo);
 		resultado.setCantidadDeMuestras(listaProductoControl.size());
+		Producto producto = listaProductoControl.get(0).getProducto();
+		resultado.setNombreProducto(producto.getNombre());
+		resultado.setMaximoEstablecido(producto.getPesoMax());
+		resultado.setMinimoEstablecido(producto.getMedMin());
+		
 		new VistaResultadoCarga(resultado);
 		
 		JOptionPane.showMessageDialog(null, "Se agregaron "

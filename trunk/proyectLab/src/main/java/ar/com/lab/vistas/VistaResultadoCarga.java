@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import ar.com.lab.listeners.ListenerGenerico;
 import ar.com.objetos.ResultadoCarga;
 
 public class VistaResultadoCarga extends JFrame {
@@ -23,53 +24,47 @@ public class VistaResultadoCarga extends JFrame {
 	JButton aceptar = new JButton("Aceptar");
 	StringSelection aCopiar;
 	JTextArea texto;
+
 	public VistaResultadoCarga(ResultadoCarga resultado) {
 
-		
 		aceptar = new JButton("Aceptar");
-		texto = new JTextArea(10, 20);
-		
+		texto = new JTextArea(10, 45);
+
 		setLayout(new FlowLayout());
 
-		
 		JScrollPane sbrText = new JScrollPane(texto);
 		sbrText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		sbrText.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		
+
 		add(sbrText);
 		add(aceptar);
 		add(portaPapeles);
 		texto.setText(resultado.getText());
 		aCopiar = new StringSelection(texto.getText());
 		aceptar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			
+
 				dispose();
-				
-				
-				
+
 			}
 		});
+
 		setResizable(false);
-		setLocation(200,200);
-		setSize(320,245);
+		setLocation(200, 200);
+		setSize(561, 245);
 		setVisible(true);
-		
-		
+
 		portaPapeles.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				cb.setContents(aCopiar, null);
 
 			}
 		});
-
-	
 
 	}
 

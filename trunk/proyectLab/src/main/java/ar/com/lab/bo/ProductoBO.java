@@ -33,10 +33,10 @@ public class ProductoBO {
 
 	}
 	
-	public List<ProductoControl> getProductosEnFecha(Date fecha,
-			ProductoControl producto) {
+	public List<ProductoControl> getProductosEnFecha(Date fechaInicial,Date fechaFinal,
+			Producto producto) {
 	
-		return productoDAO.getProductsInADate(fecha,producto);
+		return productoDAO.getProductsInADate(fechaInicial,fechaFinal,producto);
 		
 		
 	}

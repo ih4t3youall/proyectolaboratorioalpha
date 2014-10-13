@@ -16,52 +16,48 @@ import javax.swing.JPanel;
 import ar.com.lab.bo.ProductoBO;
 import ar.com.lab.listeners.ListenerAceptarGraficos;
 import ar.com.lab.listeners.ListenerCancelar;
+import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.spring.SpringContext;
 
 public class VistaGraficos extends JPanel {
 	private MenuPrincipal menuPrincipal = (MenuPrincipal) SpringContext
 			.getContext().getBean("menuPrincipal");
-	
+
 	protected ProductoBO productoBO = (ProductoBO) SpringContext.getContext()
 			.getBean("productoBO");
-	
 
 	private JComboBox<String> seleccionarGrafico;
 	private JComboBox<Date> seleccionarFechaInicial;
 	private JComboBox<Date> seleccionarFechaFinal;
-	private JComboBox<ProductoControl> seleccionarProducto;
+	private JComboBox<Producto> seleccionarProducto;
 	private JButton aceptar, cancelar;
 
 	public VistaGraficos() {
 
 		setName("VistaGraficos");
-		
+
 		setLayout(new FlowLayout());
 		List<Date> obtenerDiasCargados = productoBO.obtenerDiasCargados();
-		 List<ProductoControl> obtenerTodosLosProductosControlados = productoBO.obtenerTodosLosProductosControlados();
+		List<Producto> productos = productoBO.obtenerTodosLosProductos();
 		seleccionarFechaInicial = new JComboBox<Date>();
 		seleccionarFechaFinal = new JComboBox<Date>();
 		seleccionarFechaInicial.addItem(null);
 		seleccionarFechaFinal.addItem(null);
-		
+
 		seleccionarGrafico = new JComboBox<String>();
-		seleccionarProducto = new JComboBox<ProductoControl>();
-		
+		seleccionarProducto = new JComboBox<Producto>();
+
 		for (Date date : obtenerDiasCargados) {
 			seleccionarFechaInicial.addItem(date);
 			seleccionarFechaFinal.addItem(date);
-						
+
 		}
-		
-		for (ProductoControl producto : obtenerTodosLosProductosControlados) {
+
+		for (Producto producto : productos) {
 			seleccionarProducto.addItem(producto);
-			
-			
+
 		}
-		
-		
-		
 
 		seleccionarGrafico.addItem("Lineas");
 
@@ -73,68 +69,61 @@ public class VistaGraficos extends JPanel {
 		add(seleccionarFechaFinal);
 		seleccionarProducto.setEnabled(false);
 		add(seleccionarProducto);
-		
+
 		aceptar.setEnabled(false);
 		add(aceptar);
 		add(cancelar);
 		seleccionarFechaInicial.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(seleccionarFechaInicial.getSelectedIndex() == -1){
+
+				if (seleccionarFechaInicial.getSelectedIndex() == -1) {
 					aceptar.setEnabled(false);
-				}else {
-					
+				} else {
+
 					aceptar.setEnabled(true);
-					Date date = (Date)seleccionarFechaInicial.getSelectedItem();
-					  List<ProductoControl> productos = productoBO.obtenerProductosEnFecha(date);
-					  seleccionarProducto.removeAllItems();
-					for (ProductoControl control : productos) {
-						seleccionarProducto.addItem(control);
-						System.out.println(control.getProducto().getNombre());
-						
-					}
+					Date date = (Date) seleccionarFechaInicial
+							.getSelectedItem();
+					List<ProductoControl> productos = productoBO
+							.obtenerProductosEnFecha(date);
 					seleccionarProducto.setEnabled(true);
-					seleccionarProducto.updateUI();
-					seleccionarProducto.repaint();
-					seleccionarProducto.revalidate();
 					repaint();
 					revalidate();
-					
+
 				}
-				
+
 			}
 		});
-		
+
 		cancelar.addActionListener(new ListenerCancelar(this));
-		
+
 		aceptar.addActionListener(new ListenerAceptarGraficos(this));
-		
-		
+
 		menuPrincipal.add(this);
 		menuPrincipal.setResizable(false);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		menuPrincipal.setSize(700,700);
+
+		menuPrincipal.setSize(700, 700);
 		menuPrincipal.repaint();
 		menuPrincipal.revalidate();
-		
 
 	}
 
 	public JComboBox<String> getSeleccionarGrafico() {
 		return seleccionarGrafico;
 	}
-	public JComboBox<Date>  getSeleccionarFechaInicial() {
+
+	public JComboBox<Date> getSeleccionarFechaInicial() {
 		return seleccionarFechaInicial;
 	}
-	public JComboBox<Date>  getSeleccionarFechaFinal() {
+
+	public JComboBox<Date> getSeleccionarFechaFinal() {
 		return seleccionarFechaFinal;
 	}
-	public JComboBox<ProductoControl>  getSeleccionarproducto() {
-		return seleccionarProducto;
+
+	public Producto getSeleccionarproducto() {
+		return (Producto)seleccionarProducto.getSelectedItem();
 	}
-	
 
 }
