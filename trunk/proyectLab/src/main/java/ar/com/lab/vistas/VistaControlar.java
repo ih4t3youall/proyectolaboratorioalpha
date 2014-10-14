@@ -19,6 +19,7 @@ import ar.com.lab.bo.ProductoBO;
 import ar.com.lab.helpers.SoloNumeros;
 import ar.com.lab.listeners.ListenerCancelar;
 import ar.com.lab.listeners.ListenerFinalizarControl;
+import ar.com.lab.listeners.ListenerModificarControl;
 import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.spring.SpringContext;
@@ -31,7 +32,7 @@ public class VistaControlar extends JPanel {
 			.getBean("productoBO");
 	protected JComboBox<Producto> productos;
 	protected JTextField pesoMedio, medMedio;
-	private JButton agregar, finalizar, cancelar;
+	private JButton agregar, finalizar, cancelar,modificar;
 	protected LinkedList<ProductoControl> listaProductoControl;
 
 	public VistaControlar() {
@@ -55,6 +56,9 @@ public class VistaControlar extends JPanel {
 		agregar = new JButton("+");
 		finalizar = new JButton("Finalizar");
 		cancelar = new JButton("Cancelar");
+		modificar = new JButton("Modificar");
+		
+		
 		add(new JLabel(""));
 		add(new JLabel("Controlar"));
 		add(new JLabel(""));
@@ -77,8 +81,12 @@ public class VistaControlar extends JPanel {
 		add(agregar);
 		add(finalizar);
 		add(cancelar);
+		add(modificar);
 		add(new JLabel());
 
+		
+		modificar.addActionListener(new ListenerModificarControl(listaProductoControl,this));
+		
 		productos.addActionListener(new ActionListener() {
 
 			@Override
