@@ -39,7 +39,7 @@ public class ListenerFinalizarControl implements ActionListener {
 		double medidaMaxima = 0;
 		double medidaMinima = 9999999;
 		double diferencia = 0;
-		double error = 0;
+		int error = 0;
 		ResultadoCarga resultado = new ResultadoCarga();
 		
 		
@@ -67,11 +67,11 @@ public class ListenerFinalizarControl implements ActionListener {
 				
 			}
 			
-			if (producto.getMedMax()< productoControl.getMedMedia() && producto.getMedMin()< productoControl.getMedMedia() ){
+			if (producto.getMedMax()< productoControl.getMedMedia() || producto.getMedMin()> productoControl.getMedMedia() ){
 				error ++;
 			}
 			
-			if (producto.getPesoMax()< productoControl.getMedPeso() && producto.getPesoMin()< productoControl.getMedPeso() ){
+			if (producto.getPesoMax()< productoControl.getMedPeso() || producto.getPesoMin()> productoControl.getMedPeso() ){
 				error ++;
 			}
 			
@@ -90,8 +90,20 @@ public class ListenerFinalizarControl implements ActionListener {
 		resultado.setCantidadDeMuestras(listaProductoControl.size());
 		Producto producto = listaProductoControl.get(0).getProducto();
 		resultado.setNombreProducto(producto.getNombre());
-		resultado.setMaximoEstablecido(producto.getPesoMax());
-		resultado.setMinimoEstablecido(producto.getMedMin());
+		double pesoMax = producto.getPesoMax();
+		if(pesoMax != 0){
+		resultado.setPesoMaximoEstablecido(pesoMax);
+		resultado.setPesoMinimoEstablecido(producto.getPesoMin());
+		}
+		
+		double medMax = producto.getMedMax();
+		
+		if (medMax != 0){
+			resultado.setMedidaMaximoEstablecido(medMax);
+			resultado.setMedidaMinimoEstablecido(producto.getMedMin());	
+			
+		}
+		
 		
 		new VistaResultadoCarga(resultado);
 		

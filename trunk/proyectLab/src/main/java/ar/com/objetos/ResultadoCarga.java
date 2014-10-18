@@ -4,14 +4,16 @@ import java.text.DecimalFormat;
 
 public class ResultadoCarga {
 	String nombreProducto = "";
-	double maximoEstablecido = 0;
-	double minimoEstablecido = 0;
+	double pesoMaximoEstablecido = 0;
+	double pesoMinimoEstablecido = 0;
+	double medidaMaximoEstablecido = 0;
+	double medidaMinimoEstablecido = 0;
 	double pesoMaximo = 0;
 	double pesoMinimo = 9999999;
 	double medidaMaxima = 0;
 	double medidaMinima = 9999999;
 	double diferencia = 0;
-	double error = 0;
+	int error = 0;
 	int cantidadDeMuestras = 0;
 
 	public String getNombreProducto() {
@@ -22,20 +24,36 @@ public class ResultadoCarga {
 		this.nombreProducto = nombreProducto;
 	}
 
-	public double getMaximoEstablecido() {
-		return maximoEstablecido;
+	public double getPesoMaximoEstablecido() {
+		return pesoMaximoEstablecido;
 	}
 
-	public void setMaximoEstablecido(double maximoEstablecido) {
-		this.maximoEstablecido = maximoEstablecido;
+	public void setPesoMaximoEstablecido(double pesoMaximoEstablecido) {
+		this.pesoMaximoEstablecido = pesoMaximoEstablecido;
 	}
 
-	public double getMinimoEstablecido() {
-		return minimoEstablecido;
+	public double getPesoMinimoEstablecido() {
+		return pesoMinimoEstablecido;
 	}
 
-	public void setMinimoEstablecido(double minimoEstablecido) {
-		this.minimoEstablecido = minimoEstablecido;
+	public void setPesoMinimoEstablecido(double pesoMinimoEstablecido) {
+		this.pesoMinimoEstablecido = pesoMinimoEstablecido;
+	}
+
+	public double getMedidaMaximoEstablecido() {
+		return medidaMaximoEstablecido;
+	}
+
+	public void setMedidaMaximoEstablecido(double medidaMaximoEstablecido) {
+		this.medidaMaximoEstablecido = medidaMaximoEstablecido;
+	}
+
+	public double getMedidaMinimoEstablecido() {
+		return medidaMinimoEstablecido;
+	}
+
+	public void setMedidaMinimoEstablecido(double medidaMinimoEstablecido) {
+		this.medidaMinimoEstablecido = medidaMinimoEstablecido;
 	}
 
 	public int getCantidadDeMuestras() {
@@ -90,19 +108,31 @@ public class ResultadoCarga {
 		return error;
 	}
 
-	public void setError(double error) {
+	public void setError(int error) {
 		this.error = error;
 	}
 
 	public String getText() {
 
 		String respuesta = "";
-		respuesta +="Nombre Producto: "+nombreProducto+"\n";
-		respuesta +="Maximo establecido: "+maximoEstablecido+"\n";
-		respuesta +="Minimo establecido: "+minimoEstablecido+"\n";
+		respuesta += "Nombre Producto: " + nombreProducto + "\n";
 		
-		 respuesta += "Las muestas son :" + cantidadDeMuestras
-				+ " \n";
+		
+		if (pesoMaximoEstablecido != 0){
+		respuesta += "El peso maximo establecido: " + pesoMaximoEstablecido + "\n";
+		respuesta += "El peso Minimo establecido: " + pesoMinimoEstablecido + "\n";
+		respuesta += "La diferencia entre el peso maximo y el minimo es de "+String.valueOf(pesoMaximo-pesoMinimo)+ "\n";
+		}
+		
+		
+		if(medidaMinimoEstablecido != 0){
+			respuesta += "La medida maxima establecida: " + medidaMaximoEstablecido + "\n";
+			respuesta += "La medida Minima establecida: " + medidaMaximoEstablecido + "\n";	
+			respuesta += "La diferencia entre la medida maxima y el minima es de "+String.valueOf(medidaMaxima-medidaMinima)+ "\n";
+		}
+		
+		
+		respuesta += "Las muestas son :" + cantidadDeMuestras + " \n";
 
 		if (pesoMaximo > 0) {
 			respuesta += "El peso maximo registrado fue de " + pesoMaximo
@@ -115,15 +145,15 @@ public class ResultadoCarga {
 					+ ", y la medida minima fue de " + medidaMinima + "\n";
 
 		}
-		Double tazaError =(error * 100) / cantidadDeMuestras;
 		
+		double errorAux = error * 100;
+		
+		
+		Double tazaError =errorAux/cantidadDeMuestras;
 
-		DecimalFormat df = new DecimalFormat("0.00"); 
+		DecimalFormat df = new DecimalFormat("0.00");
 		String format = df.format(tazaError);
-		
 
-		
-		
 		respuesta += "La taza de error fue de un " + format + "%";
 
 		return respuesta;
