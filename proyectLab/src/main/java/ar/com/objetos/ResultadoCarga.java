@@ -13,7 +13,8 @@ public class ResultadoCarga {
 	double medidaMaxima = 0;
 	double medidaMinima = 9999999;
 	double diferencia = 0;
-	int error = 0;
+	int errorPeso = 0;
+	int errorMedida = 0;
 	int cantidadDeMuestras = 0;
 
 	public String getNombreProducto() {
@@ -104,34 +105,45 @@ public class ResultadoCarga {
 		this.diferencia = diferencia;
 	}
 
-	public double getError() {
-		return error;
+	public int getErrorPeso() {
+		return errorPeso;
 	}
 
-	public void setError(int error) {
-		this.error = error;
+	public void setErrorPeso(int errorPeso) {
+		this.errorPeso = errorPeso;
+	}
+
+	public int getErrorMedida() {
+		return errorMedida;
+	}
+
+	public void setErrorMedida(int errorMedida) {
+		this.errorMedida = errorMedida;
 	}
 
 	public String getText() {
 
 		String respuesta = "";
 		respuesta += "Nombre Producto: " + nombreProducto + "\n";
-		
-		
-		if (pesoMaximoEstablecido != 0){
-		respuesta += "El peso maximo establecido: " + pesoMaximoEstablecido + "\n";
-		respuesta += "El peso Minimo establecido: " + pesoMinimoEstablecido + "\n";
-		respuesta += "La diferencia entre el peso maximo y el minimo es de "+String.valueOf(pesoMaximo-pesoMinimo)+ "\n";
+
+		if (pesoMaximoEstablecido != 0) {
+			respuesta += "El peso maximo establecido: " + pesoMaximoEstablecido
+					+ "\n";
+			respuesta += "El peso Minimo establecido: " + pesoMinimoEstablecido
+					+ "\n";
+			respuesta += "La diferencia entre el peso maximo y el minimo es de "
+					+ String.valueOf(pesoMaximo - pesoMinimo) + "\n";
 		}
-		
-		
-		if(medidaMinimoEstablecido != 0){
-			respuesta += "La medida maxima establecida: " + medidaMaximoEstablecido + "\n";
-			respuesta += "La medida Minima establecida: " + medidaMaximoEstablecido + "\n";	
-			respuesta += "La diferencia entre la medida maxima y el minima es de "+String.valueOf(medidaMaxima-medidaMinima)+ "\n";
+
+		if (medidaMinimoEstablecido != 0) {
+			respuesta += "La medida maxima establecida: "
+					+ medidaMaximoEstablecido + "\n";
+			respuesta += "La medida Minima establecida: "
+					+ medidaMinimoEstablecido + "\n";
+			respuesta += "La diferencia entre la medida maxima y el minima es de "
+					+ String.valueOf(medidaMaxima - medidaMinima) + "\n";
 		}
-		
-		
+
 		respuesta += "Las muestas son :" + cantidadDeMuestras + " \n";
 
 		if (pesoMaximo > 0) {
@@ -145,16 +157,19 @@ public class ResultadoCarga {
 					+ ", y la medida minima fue de " + medidaMinima + "\n";
 
 		}
-		
-		double errorAux = error * 100;
-		
-		
-		Double tazaError =errorAux/cantidadDeMuestras;
+
+		double errorAuxPeso = errorPeso * 100;
+		double errorAuxMedida = errorMedida * 100;
+
+		Double tazaErrorPeso = errorAuxPeso / cantidadDeMuestras;
+		Double tazaErrorMedida = errorAuxMedida / cantidadDeMuestras;
 
 		DecimalFormat df = new DecimalFormat("0.00");
-		String format = df.format(tazaError);
+		String formatErrorMedida = df.format(tazaErrorMedida);
+		String formatErrorPeso = df.format(tazaErrorPeso);
 
-		respuesta += "La taza de error fue de un " + format + "%";
+		respuesta += "La taza de error de los pesos fue de un " + formatErrorPeso + "% \n";
+		respuesta += "La taza de error de las medidas fue de un " + formatErrorMedida + "% \n";
 
 		return respuesta;
 
