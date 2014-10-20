@@ -39,49 +39,46 @@ public class ListenerFinalizarControl implements ActionListener {
 		double medidaMaxima = 0;
 		double medidaMinima = 9999999;
 		double diferencia = 0;
-		int error = 0;
+		int errorMedida = 0;
+		int errorPeso = 0;
 		ResultadoCarga resultado = new ResultadoCarga();
-		
-		
-		
+
 		for (ProductoControl productoControl : listaProductoControl) {
 
 			Producto producto = productoControl.getProducto();
-			
-			
-			if (productoControl.getMedMedia() < medidaMinima ){
+
+			if (productoControl.getMedMedia() < medidaMinima) {
 				medidaMinima = productoControl.getMedMedia();
-				
+
 			}
-			
-			if(productoControl.getMedMedia() > medidaMaxima){
+
+			if (productoControl.getMedMedia() > medidaMaxima) {
 				medidaMaxima = productoControl.getMedMedia();
-				
+
 			}
-			
-			if (productoControl.getMedPeso()<pesoMinimo ){
-				pesoMinimo  = productoControl.getMedPeso();
+
+			if (productoControl.getMedPeso() < pesoMinimo) {
+				pesoMinimo = productoControl.getMedPeso();
 			}
-			if(productoControl.getMedPeso() > pesoMaximo){
+			if (productoControl.getMedPeso() > pesoMaximo) {
 				pesoMaximo = productoControl.getMedPeso();
-				
+
 			}
-			
-			if (producto.getMedMax()< productoControl.getMedMedia() || producto.getMedMin()> productoControl.getMedMedia() ){
-				error ++;
+
+			if (producto.getMedMax() < productoControl.getMedMedia()
+					|| producto.getMedMin() > productoControl.getMedMedia()) {
+				errorMedida++;
 			}
-			
-			if (producto.getPesoMax()< productoControl.getMedPeso() || producto.getPesoMin()> productoControl.getMedPeso() ){
-				error ++;
+
+			if (producto.getPesoMax() < productoControl.getMedPeso()
+					|| producto.getPesoMin() > productoControl.getMedPeso()) {
+				errorPeso++;
 			}
-			
-			
-			
-			
-			
+
 		}
 
-		resultado.setError(error);
+		resultado.setErrorPeso(errorPeso);
+		resultado.setErrorMedida(errorMedida);
 		resultado.setDiferencia(diferencia);
 		resultado.setMedidaMaxima(medidaMaxima);
 		resultado.setMedidaMinima(medidaMinima);
@@ -91,28 +88,24 @@ public class ListenerFinalizarControl implements ActionListener {
 		Producto producto = listaProductoControl.get(0).getProducto();
 		resultado.setNombreProducto(producto.getNombre());
 		double pesoMax = producto.getPesoMax();
-		if(pesoMax != 0){
-		resultado.setPesoMaximoEstablecido(pesoMax);
-		resultado.setPesoMinimoEstablecido(producto.getPesoMin());
+		if (pesoMax != 0) {
+			resultado.setPesoMaximoEstablecido(pesoMax);
+			resultado.setPesoMinimoEstablecido(producto.getPesoMin());
 		}
-		
+
 		double medMax = producto.getMedMax();
-		
-		if (medMax != 0){
+
+		if (medMax != 0) {
 			resultado.setMedidaMaximoEstablecido(medMax);
-			resultado.setMedidaMinimoEstablecido(producto.getMedMin());	
-			
+			resultado.setMedidaMinimoEstablecido(producto.getMedMin());
+
 		}
-		
-		
+
 		new VistaResultadoCarga(resultado);
-		
+
 		JOptionPane.showMessageDialog(null, "Se agregaron "
 				+ listaProductoControl.size() + " controles.");
-		
-		
-		
-		
+
 		listaProductoControl.clear();
 
 	}

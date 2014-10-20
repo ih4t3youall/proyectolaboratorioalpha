@@ -44,8 +44,8 @@ public class VistaAgregar extends JPanel {
 
 		add(new JLabel("Nombre"));
 		add(nombre);
-		add(new JLabel());
-		add(new JLabel());
+		add(new JLabel("Doble peso"));
+		add(new JCheckBox());
 		add(new JLabel());
 		add(new JLabel("Minimo"));
 		add(new JLabel("Maximo"));
