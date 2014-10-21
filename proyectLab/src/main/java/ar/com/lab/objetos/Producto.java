@@ -10,15 +10,26 @@ public class Producto {
 	private double medMax;
 	private double medMin;
 	private Date fechaIngreso;
+	private boolean doblePeso;
 
-	public Producto() {
 
+	
+	public Producto(){
+		
+	}
+	
+	public boolean isDoblePeso() {
+		return doblePeso;
+	}
+
+	public void setDoblePeso(boolean doblePeso) {
+		this.doblePeso = doblePeso;
 	}
 
 	public Producto(int idProducto) {
 
 		this.idProducto = idProducto;
-		
+
 	}
 
 	public Producto(String nombre) {
@@ -31,13 +42,14 @@ public class Producto {
 	}
 
 	public Producto(String nombre, double pesoMax, double pesoMin,
-			double medMax, double medMin) {
+			double medMax, double medMin,boolean doblePeso) {
 		super();
 		this.nombre = nombre;
 		this.pesoMax = pesoMax;
 		this.pesoMin = pesoMin;
 		this.medMax = medMax;
 		this.medMin = medMin;
+		this.doblePeso = doblePeso;
 	}
 
 	@Override

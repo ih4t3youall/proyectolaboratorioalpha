@@ -20,6 +20,7 @@ public class ProductoRowMapper implements RowMapper<Producto> {
 		producto.setMedMin(rs.getDouble("medMin"));
 		producto.setPesoMax(rs.getDouble("pesoMax"));
 		producto.setPesoMin(rs.getDouble("pesoMin"));
+		producto.setDoblePeso(rs.getBoolean("doblePeso"));
 
 		return producto;
 	}

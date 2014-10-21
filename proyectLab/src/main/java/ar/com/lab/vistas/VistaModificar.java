@@ -30,21 +30,23 @@ public class VistaModificar extends JPanel {
 	private JTextField medMax = new JTextField(10);
 	private JTextField medMin = new JTextField(10);
 	private JComboBox<Producto> productos;
-	private JButton cambiarNombre, aceptar,cancelar;
+	private JButton cambiarNombre, aceptar, cancelar;
 	protected List<Producto> obtenerTodosLosProductos;
+	private JLabel labelMedida = new JLabel("Medidas");
+	private JLabel labelPeso = new JLabel("Pesos");
+
 	public VistaModificar() {
 
 		setName("vistaModificar");
 		setLayout(new GridLayout(5, 5));
-		
-		//init
+
+		// init
 		cambiarNombre = new JButton("Cambiar Nombre");
-		aceptar =  new JButton("Aceptar");
+		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("cancelar");
 
 		productos = new JComboBox<Producto>();
-		obtenerTodosLosProductos = productoBO
-				.obtenerTodosLosProductos();
+		obtenerTodosLosProductos = productoBO.obtenerTodosLosProductos();
 		productos.addItem(new Producto("Seleccione"));
 		for (Producto producto : obtenerTodosLosProductos) {
 
@@ -56,22 +58,19 @@ public class VistaModificar extends JPanel {
 		medMin.setEnabled(false);
 		pesoMax.setEnabled(false);
 		pesoMin.setEnabled(false);
-		
+
 		SoloNumeros soloNumeros = new SoloNumeros();
 		medMax.addKeyListener(soloNumeros);
 		medMin.addKeyListener(soloNumeros);
 		pesoMax.addKeyListener(soloNumeros);
 		pesoMin.addKeyListener(soloNumeros);
-		
-	
-		
+
 		add(new JLabel("Producto: "));
 		add(productos);
 		add(cambiarNombre);
 		add(new JLabel());
-		add(new JLabel("Medidas"));
+		add(labelMedida);
 
-		
 		pesoMax.setText("0");
 		pesoMin.setText("0");
 		medMax.setText("0");
@@ -80,7 +79,7 @@ public class VistaModificar extends JPanel {
 		add(medMin);
 		add(medMax);
 		add(new JLabel(""));
-		add(new JLabel("peso"));
+		add(labelPeso);
 		add(pesoMin);
 		add(pesoMax);
 		add(new JLabel(""));
@@ -90,7 +89,7 @@ public class VistaModificar extends JPanel {
 		add(new JLabel(""));
 		add(new JLabel(""));
 		setVisible(true);
-		
+
 		add(aceptar);
 		add(cancelar);
 
@@ -101,18 +100,19 @@ public class VistaModificar extends JPanel {
 		menuPrincipal.revalidate();
 
 		cambiarNombre.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String showInputDialog = JOptionPane.showInputDialog("Ingrese nuevo nombre.");
-				((Producto)(productos.getSelectedItem())).setNombre(showInputDialog);
+				String showInputDialog = JOptionPane
+						.showInputDialog("Ingrese nuevo nombre.");
+				((Producto) (productos.getSelectedItem()))
+						.setNombre(showInputDialog);
 				productos.revalidate();
 				productos.repaint();
-				
-				
+
 			}
 		});
-		
+
 		productos.addActionListener(new ActionListener() {
 
 			@Override
@@ -137,6 +137,13 @@ public class VistaModificar extends JPanel {
 					medMax.setText(String.valueOf(producto.getMedMax()));
 					pesoMin.setText(String.valueOf(producto.getPesoMin()));
 					pesoMax.setText(String.valueOf(producto.getPesoMax()));
+					if (producto.isDoblePeso()) {
+
+						labelPeso.setText("Producto A");
+						labelMedida.setText("Producto B");
+
+					}
+
 				}
 
 			}
@@ -144,30 +151,29 @@ public class VistaModificar extends JPanel {
 
 		cancelar.addActionListener(new ListenerCancelar(this));
 		aceptar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				Producto productoaux = (Producto)productos.getSelectedItem();
+
+				Producto productoaux = (Producto) productos.getSelectedItem();
 				productoaux.setMedMax(Double.parseDouble(medMax.getText()));
 				productoaux.setMedMin(Double.parseDouble(medMin.getText()));
 				productoaux.setPesoMax(Double.parseDouble(pesoMax.getText()));
 				productoaux.setPesoMin(Double.parseDouble(pesoMin.getText()));
-				
-				
+
 				LinkedList<Producto> productosModificados = new LinkedList<Producto>();
 				for (Producto producto : obtenerTodosLosProductos) {
 					productosModificados.add(producto);
 				}
-				
+
 				productoBO.modificarProductos(productosModificados);
-				
-				JOptionPane.showMessageDialog(null, "El producto ah sido modificado");
-				
-				
+
+				JOptionPane.showMessageDialog(null,
+						"El producto ah sido modificado");
+
 			}
 		});
-		
+
 	}
 
 }

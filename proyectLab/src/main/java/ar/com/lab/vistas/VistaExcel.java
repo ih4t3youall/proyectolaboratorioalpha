@@ -73,7 +73,6 @@ public class VistaExcel extends JPanel {
 
 		menuPrincipal.add(this);
 		menuPrincipal.setResizable(false);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 		menuPrincipal.setSize(750, 125);
 		menuPrincipal.repaint();

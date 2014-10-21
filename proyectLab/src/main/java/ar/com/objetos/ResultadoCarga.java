@@ -3,22 +3,31 @@ package ar.com.objetos;
 import java.text.DecimalFormat;
 
 public class ResultadoCarga {
-	String nombreProducto = "";
-	double pesoMaximoEstablecido = 0;
-	double pesoMinimoEstablecido = 0;
-	double medidaMaximoEstablecido = 0;
-	double medidaMinimoEstablecido = 0;
-	double pesoMaximo = 0;
-	double pesoMinimo = 9999999;
-	double medidaMaxima = 0;
-	double medidaMinima = 9999999;
-	double diferencia = 0;
-	int errorPeso = 0;
-	int errorMedida = 0;
-	int cantidadDeMuestras = 0;
+	private String nombreProducto = "";
+	private double pesoMaximoEstablecido = 0;
+	private double pesoMinimoEstablecido = 0;
+	private double medidaMaximoEstablecido = 0;
+	private double medidaMinimoEstablecido = 0;
+	private double pesoMaximo = 0;
+	private double pesoMinimo = 9999999;
+	private double medidaMaxima = 0;
+	private double medidaMinima = 9999999;
+	private double diferencia = 0;
+	private int errorPeso = 0;
+	private int errorMedida = 0;
+	private int cantidadDeMuestras = 0;
+	private boolean doblePeso;
 
 	public String getNombreProducto() {
 		return nombreProducto;
+	}
+
+	public boolean isDoblePeso() {
+		return doblePeso;
+	}
+
+	public void setDoblePeso(boolean doblePeso) {
+		this.doblePeso = doblePeso;
 	}
 
 	public void setNombreProducto(String nombreProducto) {
@@ -122,8 +131,8 @@ public class ResultadoCarga {
 	}
 
 	public String getText() {
-
 		String respuesta = "";
+		if(!doblePeso){
 		respuesta += "Nombre Producto: " + nombreProducto + "\n";
 
 		if (pesoMaximoEstablecido != 0) {
@@ -168,9 +177,63 @@ public class ResultadoCarga {
 		String formatErrorMedida = df.format(tazaErrorMedida);
 		String formatErrorPeso = df.format(tazaErrorPeso);
 
-		respuesta += "La taza de error de los pesos fue de un " + formatErrorPeso + "% \n";
-		respuesta += "La taza de error de las medidas fue de un " + formatErrorMedida + "% \n";
+		respuesta += "La taza de error de los pesos fue de un "
+				+ formatErrorPeso + "% \n";
+		respuesta += "La taza de error de las medidas fue de un "
+				+ formatErrorMedida + "% \n";
+		}else {
+			
+			respuesta += "Nombre Producto: " + nombreProducto + "\n";
 
+			if (pesoMaximoEstablecido != 0) {
+				respuesta += "El peso maximo establecido para el Producto A: " + pesoMaximoEstablecido
+						+ "\n";
+				respuesta += "El peso Minimo establecido para el Producto A: " + pesoMinimoEstablecido
+						+ "\n";
+				respuesta += "La diferencia entre el peso maximo y el minimo del producto A "
+						+ String.valueOf(pesoMaximo - pesoMinimo) + "\n\n\n";
+			}
+
+			if (medidaMinimoEstablecido != 0) {
+				respuesta += "El peso maximo establecido para el Producto B "
+						+ medidaMaximoEstablecido + "\n";
+				respuesta += "El peso minimo establecido para el Producto B: "
+						+ medidaMinimoEstablecido + "\n";
+				respuesta += "La diferencia entre la medida maxima y el minima del Producto B"
+						+ String.valueOf(medidaMaxima - medidaMinima) + "\n\n\n";
+			}
+
+			respuesta += "Las muestas son :" + cantidadDeMuestras + " \n";
+
+			if (pesoMaximo > 0) {
+				respuesta += "El peso maximo para el producto A fue de " + pesoMaximo
+						+ ", y el minimo " + pesoMinimo + "\n";
+
+			}
+
+			if (medidaMaxima > 0) {
+				respuesta += "El peso maximo para el producto B fue de " + medidaMaxima
+						+ ", y el minimo " + medidaMinima + "\n";
+
+			}
+
+			double errorAuxPeso = errorPeso * 100;
+			double errorAuxMedida = errorMedida * 100;
+
+			Double tazaErrorPeso = errorAuxPeso / cantidadDeMuestras;
+			Double tazaErrorMedida = errorAuxMedida / cantidadDeMuestras;
+
+			DecimalFormat df = new DecimalFormat("0.00");
+			String formatErrorMedida = df.format(tazaErrorMedida);
+			String formatErrorPeso = df.format(tazaErrorPeso);
+
+			respuesta += "La taza de error del Producto A "
+					+ formatErrorPeso + "% \n";
+			respuesta += "La taza de error del Producto B "
+					+ formatErrorMedida + "% \n";
+			
+			
+		}
 		return respuesta;
 
 	}

@@ -133,26 +133,9 @@ public class ListenerAceptarGraficos implements ActionListener {
 					}
 
 				}
-				// JFrame frame = new JFrame();
-				// frame.setResizable(true);
-				// frame.setSize(500,500);
-				// frame.add(panel);
-				// frame.setVisible(true);
-				// frame.requestFocus();
-				// frame.requestFocusInWindow();
-
-				// XYSeriesCollection generarDatasetProyectedValues =
-				// generadorGraficos.generarDatasetProyectedValues(obtenerControlProductosPorFecha);
 
 				menuPrincipal.setResizable(true);
 
-				// contexto.removeAll();
-				// contexto.add(grafica);
-				// contexto.repaint();
-				// contexto.revalidate();
-				// JButton volver = new JButton("volver");
-				// volver.addActionListener(new ListenerCancelar(contexto));
-				// contexto.add(volver);
 			}
 		} catch (CampoInvalidoExeption e1) {
 

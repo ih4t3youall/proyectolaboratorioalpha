@@ -38,6 +38,8 @@ public class ListenerGenerarExcel implements ActionListener {
 	}
 
 	private String[] ENCABEZADO = { "Fecha", "Hora", "Peso", "Medida" };
+	private String[] ENCABEZADO_DOBLE_PESO = { "Fecha", "Hora", "Producto A",
+			"Producto B" };
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -54,8 +56,9 @@ public class ListenerGenerarExcel implements ActionListener {
 			e1.printStackTrace();
 		}
 		java.util.List<ProductoControl> productosEnFecha = productoBO
-				.getProductosEnFecha(contexto.getSeleccionarDateInicial()
-						,contexto.getSeleccionarDateFinal(), contexto.getSeleccionarProducto());
+				.getProductosEnFecha(contexto.getSeleccionarDateInicial(),
+						contexto.getSeleccionarDateFinal(),
+						contexto.getSeleccionarProducto());
 
 		/* Se crea el libro de excel usando el objeto de tipo Workbook */
 		Workbook libro = new HSSFWorkbook();
@@ -82,9 +85,15 @@ public class ListenerGenerarExcel implements ActionListener {
 				productosEnFecha.get(0).getProducto().getNombre());
 
 		Row fila = hoja.createRow(1);
+		boolean doblePeso = productosEnFecha.get(0).getProducto().isDoblePeso();
+
 		for (int i = 0; i < ENCABEZADO.length; i++) {
 
-			fila.createCell(i).setCellValue(ENCABEZADO[i]);
+			if (doblePeso) {
+				fila.createCell(i).setCellValue(ENCABEZADO_DOBLE_PESO[i]);
+			} else {
+				fila.createCell(i).setCellValue(ENCABEZADO[i]);
+			}
 
 		}
 
