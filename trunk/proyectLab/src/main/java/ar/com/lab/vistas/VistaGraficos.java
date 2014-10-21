@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -19,6 +20,7 @@ import ar.com.lab.listeners.ListenerCancelar;
 import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.spring.SpringContext;
+import ar.com.objetos.Comparador;
 
 public class VistaGraficos extends JPanel {
 	private MenuPrincipal menuPrincipal = (MenuPrincipal) SpringContext
@@ -53,7 +55,7 @@ public class VistaGraficos extends JPanel {
 			seleccionarFechaFinal.addItem(date);
 
 		}
-
+		Collections.sort(productos,new Comparador());
 		for (Producto producto : productos) {
 			seleccionarProducto.addItem(producto);
 
