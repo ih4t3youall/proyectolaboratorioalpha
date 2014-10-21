@@ -1,6 +1,7 @@
 package ar.com.lab.vistas;
 
 import java.awt.FlowLayout;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -12,6 +13,7 @@ import ar.com.lab.listeners.ListenerCancelar;
 import ar.com.lab.listeners.ListenerEliminarProducto;
 import ar.com.lab.objetos.Producto;
 import ar.com.lab.spring.SpringContext;
+import ar.com.objetos.Comparador;
 
 public class VistaEliminar extends JPanel {
 
@@ -52,6 +54,9 @@ public class VistaEliminar extends JPanel {
 		List<Producto> obtenerTodosLosProductos = productoBO
 				.obtenerTodosLosProductos();
 
+		
+		Collections.sort(obtenerTodosLosProductos,new Comparador());
+		
 		for (Producto producto : obtenerTodosLosProductos) {
 
 			productos.addItem(producto);

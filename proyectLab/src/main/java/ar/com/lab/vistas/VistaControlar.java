@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import ar.com.lab.listeners.ListenerModificarControl;
 import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.spring.SpringContext;
+import ar.com.objetos.Comparador;
 
 public class VistaControlar extends JPanel {
 
@@ -67,9 +69,15 @@ public class VistaControlar extends JPanel {
 		pesoMedio.setEnabled(false);
 		medMedio.setEnabled(false);
 
+		
+		
+		Collections.sort(obtenerTodosLosProductos,new Comparador());
+		
 		for (Producto producto : obtenerTodosLosProductos) {
 			productos.addItem(producto);
 		}
+		
+		
 		add(productos);
 		add(labelPeso);
 		add(labelMedida);
@@ -87,6 +95,9 @@ public class VistaControlar extends JPanel {
 		modificar.addActionListener(new ListenerModificarControl(
 				listaProductoControl, this));
 
+		
+		
+		
 		productos.addActionListener(new ActionListener() {
 
 			@Override
