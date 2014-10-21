@@ -32,8 +32,10 @@ public class VistaControlar extends JPanel {
 			.getBean("productoBO");
 	protected JComboBox<Producto> productos;
 	protected JTextField pesoMedio, medMedio;
-	private JButton agregar, finalizar, cancelar,modificar;
+	private JButton agregar, finalizar, cancelar, modificar;
 	protected LinkedList<ProductoControl> listaProductoControl;
+	private JLabel labelPeso = new JLabel("Peso");
+	private JLabel labelMedida = new JLabel("Medida");
 
 	public VistaControlar() {
 
@@ -46,33 +48,31 @@ public class VistaControlar extends JPanel {
 		List<Producto> obtenerTodosLosProductos = productoBO
 				.obtenerTodosLosProductos();
 		productos.addItem(new Producto("Seleccione"));
-		
+
 		pesoMedio = new JTextField(10);
 		medMedio = new JTextField(10);
-		SoloNumeros soloNumeros  = new SoloNumeros();
+		SoloNumeros soloNumeros = new SoloNumeros();
 		pesoMedio.addKeyListener(soloNumeros);
 		medMedio.addKeyListener(soloNumeros);
-		
+
 		agregar = new JButton("+");
 		finalizar = new JButton("Finalizar");
 		cancelar = new JButton("Cancelar");
 		modificar = new JButton("Modificar");
-		
-		
+
 		add(new JLabel(""));
 		add(new JLabel("Controlar"));
 		add(new JLabel(""));
 
 		pesoMedio.setEnabled(false);
 		medMedio.setEnabled(false);
-		
 
 		for (Producto producto : obtenerTodosLosProductos) {
 			productos.addItem(producto);
 		}
 		add(productos);
-		add(new JLabel("Peso"));
-		add(new JLabel("Medida"));
+		add(labelPeso);
+		add(labelMedida);
 
 		add(new JLabel("Media"));
 		add(pesoMedio);
@@ -84,9 +84,9 @@ public class VistaControlar extends JPanel {
 		add(modificar);
 		add(new JLabel());
 
-		
-		modificar.addActionListener(new ListenerModificarControl(listaProductoControl,this));
-		
+		modificar.addActionListener(new ListenerModificarControl(
+				listaProductoControl, this));
+
 		productos.addActionListener(new ActionListener() {
 
 			@Override
@@ -113,6 +113,15 @@ public class VistaControlar extends JPanel {
 						}
 					}
 
+					if (producto.isDoblePeso()) {
+
+						labelPeso.setText("Producto A");
+						labelPeso.repaint();
+						labelMedida.setText("Producto B");
+						labelMedida.repaint();
+						
+					}
+
 				}
 
 			}
@@ -124,8 +133,8 @@ public class VistaControlar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-			control();
+
+				control();
 
 			}
 
@@ -134,8 +143,7 @@ public class VistaControlar extends JPanel {
 		cancelar.addActionListener(new ListenerCancelar(this));
 
 		finalizar.addActionListener(new ListenerFinalizarControl(this));
-		
-		
+
 		menuPrincipal.add(this);
 		menuPrincipal.setResizable(false);
 		menuPrincipal.setSize(620, 145);
@@ -162,7 +170,7 @@ public class VistaControlar extends JPanel {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-				control();
+					control();
 
 				}
 
@@ -186,12 +194,11 @@ public class VistaControlar extends JPanel {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-				control();
+					control();
 
 				}
 
 			}
-
 
 		});
 
@@ -200,10 +207,8 @@ public class VistaControlar extends JPanel {
 	private void agregarAlista() {
 		Producto producto = (Producto) productos.getSelectedItem();
 		boolean error = false;
-		if (pesoMedio.isEnabled() ) {
-			
-			
-			
+		if (pesoMedio.isEnabled()) {
+
 			if (!(producto.getPesoMin() < Double.parseDouble(pesoMedio
 					.getText()))
 					&& !(Double.parseDouble(pesoMedio.getText()) < producto
@@ -212,7 +217,7 @@ public class VistaControlar extends JPanel {
 			}
 		}
 
-		if (medMedio.isEnabled() ) {
+		if (medMedio.isEnabled()) {
 			if (!(producto.getMedMin() < Double.parseDouble(medMedio.getText()) && Double
 					.parseDouble(medMedio.getText()) < producto.getMedMax())) {
 
@@ -221,8 +226,6 @@ public class VistaControlar extends JPanel {
 			}
 		}
 
-		
-		
 		ProductoControl productoControl = new ProductoControl(producto,
 				Double.parseDouble(medMedio.getText()),
 				Double.parseDouble(pesoMedio.getText()), error);
@@ -231,66 +234,61 @@ public class VistaControlar extends JPanel {
 		pesoMedio.setText("");
 
 	}
-	
-	
-	public  LinkedList<ProductoControl> getListaProductoControl(){
-		
+
+	public LinkedList<ProductoControl> getListaProductoControl() {
+
 		return listaProductoControl;
-		
+
 	}
-	
-	public void control(){
-		
-		
-		if(medMedio.isEnabled() && pesoMedio.isEnabled()){
-			if(medMedio.getText().equals("")){
+
+	public void control() {
+
+		if (medMedio.isEnabled() && pesoMedio.isEnabled()) {
+			if (medMedio.getText().equals("")) {
 				medMedio.requestFocus();
-			}else{
-			if(!medMedio.getText().equals("") ){
-				agregarAlista();
-				pesoMedio.requestFocus();
-			}else {
-				
-				
-				JOptionPane.showMessageDialog(null, "Debe completar ambos campos.");
+			} else {
+				if (!medMedio.getText().equals("")) {
+					agregarAlista();
+					pesoMedio.requestFocus();
+				} else {
+
+					JOptionPane.showMessageDialog(null,
+							"Debe completar ambos campos.");
+				}
 			}
-			}
-			
-			
-			
+
 		}
-		
-		
-		if(medMedio.isEnabled() && !pesoMedio.isEnabled()){
-			
-			if(!medMedio.getText().equals("")){
+
+		if (medMedio.isEnabled() && !pesoMedio.isEnabled()) {
+
+			if (!medMedio.getText().equals("")) {
 				pesoMedio.setText("0");
 				agregarAlista();
-			}else {
-				JOptionPane.showMessageDialog(null, "debe completar la medida media.");
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"debe completar la medida media.");
 				medMedio.requestFocus();
-				
+
 			}
-			
+
 		}
-		
-		if(!medMedio.isEnabled() && pesoMedio.isEnabled()){
-			
-			if(!pesoMedio.getText().equals("")){
-				
+
+		if (!medMedio.isEnabled() && pesoMedio.isEnabled()) {
+
+			if (!pesoMedio.getText().equals("")) {
+
 				medMedio.setText("0");
 				agregarAlista();
-				
-			}else {
-				JOptionPane.showMessageDialog(null, "debe completar el peso medio.");
+
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"debe completar el peso medio.");
 				pesoMedio.requestFocus();
-				
+
 			}
-			
+
 		}
-		
-		
+
 	}
-	
 
 }

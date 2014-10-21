@@ -35,11 +35,11 @@ public class ProductoDAO {
 	public void saveProductos(LinkedList<Producto> productos) {
 
 		for (Producto producto : productos) {
-			String sql = "insert into producto (nombre,medMax,medMin,pesoMax,pesoMin,fecha)values(?,?,?,?,?,now())";
+			String sql = "insert into producto (nombre,medMax,medMin,pesoMax,pesoMin,fecha,doblePeso)values(?,?,?,?,?,now(),?)";
 			jdbcTemplate.update(sql,
 					new Object[] { producto.getNombre(), producto.getMedMax(),
 							producto.getMedMin(), producto.getPesoMax(),
-							producto.getPesoMin() });
+							producto.getPesoMin(),producto.isDoblePeso() });
 		}
 
 	}

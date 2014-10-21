@@ -1,5 +1,6 @@
 package ar.com.lab.vistas;
 
+import java.awt.Checkbox;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -37,6 +39,9 @@ public class VistaAgregar extends JPanel {
 	private JButton cancelar = new JButton("Cancelar");
 	private JButton agregar = new JButton("+");
 	private LinkedList<Producto> productos = new LinkedList<Producto>();
+	private JCheckBox check = new JCheckBox("Doble peso");
+	private JLabel labelPesos = new JLabel("Pesos");
+	private JLabel labelMedidas = new JLabel("Medidas");
 
 	public VistaAgregar() {
 		setName("vistaAgregar");
@@ -44,13 +49,13 @@ public class VistaAgregar extends JPanel {
 
 		add(new JLabel("Nombre"));
 		add(nombre);
-		add(new JLabel("Doble peso"));
-		add(new JCheckBox());
+		add(check);
+		add(new JLabel());
 		add(new JLabel());
 		add(new JLabel("Minimo"));
 		add(new JLabel("Maximo"));
 		add(new JLabel());
-		add(new JLabel("Medidas"));
+		add(labelPesos);
 
 		SoloNumeros soloNumeros = new SoloNumeros();
 		medMax.addKeyListener(soloNumeros);
@@ -68,13 +73,14 @@ public class VistaAgregar extends JPanel {
 		medMax.addFocusListener(listenerFocus);
 		medMin.addFocusListener(listenerFocus);
 
-		add(medMin);
-		add(medMax);
-		// add(checkMed);
-		add(new JLabel(""));
-		add(new JLabel("peso"));
 		add(pesoMin);
 		add(pesoMax);
+		// add(checkMed);
+		add(new JLabel(""));
+		add(labelMedidas);
+		
+		add(medMin);
+		add(medMax);
 		// add(checkPeso);
 		add(new JLabel(""));
 		add(agregar);
@@ -95,6 +101,30 @@ public class VistaAgregar extends JPanel {
 
 		createKeyListeners();
 
+		check.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (check.isSelected()) {
+
+					labelPesos.setText("Producto A");
+					labelMedidas.setText("Producto B");
+					labelPesos.repaint();
+					labelMedidas.repaint();
+					
+				} else {
+					labelPesos.setText("Pesos");
+					labelMedidas.setText("Medidas");
+					labelPesos.repaint();
+
+					labelMedidas.repaint();
+
+				}
+
+			}
+		});
+
 	}
 
 	public Producto getProducto() {
@@ -107,11 +137,12 @@ public class VistaAgregar extends JPanel {
 				.getText();
 		String medidaMinima = medMin.getText().equals("") ? "0" : medMin
 				.getText();
-
+		
+		
 		Producto producto = new Producto(nombre.getText(),
 				Double.parseDouble(pesoMaximo), Double.parseDouble(pesoMinimo),
 				Double.parseDouble(medidaMaxima),
-				Double.parseDouble(medidaMinima));
+				Double.parseDouble(medidaMinima),check.isSelected());
 
 		return producto;
 	}
@@ -212,7 +243,7 @@ public class VistaAgregar extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				try {
-					
+
 					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 						controlar();
 						addlista(getProducto());

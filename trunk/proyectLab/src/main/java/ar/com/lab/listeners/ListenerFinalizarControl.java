@@ -87,6 +87,7 @@ public class ListenerFinalizarControl implements ActionListener {
 		resultado.setCantidadDeMuestras(listaProductoControl.size());
 		Producto producto = listaProductoControl.get(0).getProducto();
 		resultado.setNombreProducto(producto.getNombre());
+		resultado.setDoblePeso(producto.isDoblePeso());
 		double pesoMax = producto.getPesoMax();
 		if (pesoMax != 0) {
 			resultado.setPesoMaximoEstablecido(pesoMax);

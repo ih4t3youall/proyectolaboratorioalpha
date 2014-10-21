@@ -83,10 +83,6 @@ public class VistaGraficos extends JPanel {
 				} else {
 
 					aceptar.setEnabled(true);
-					Date date = (Date) seleccionarFechaInicial
-							.getSelectedItem();
-					List<ProductoControl> productos = productoBO
-							.obtenerProductosEnFecha(date);
 					seleccionarProducto.setEnabled(true);
 					repaint();
 					revalidate();
@@ -96,13 +92,12 @@ public class VistaGraficos extends JPanel {
 			}
 		});
 
+		//listeners
 		cancelar.addActionListener(new ListenerCancelar(this));
-
 		aceptar.addActionListener(new ListenerAceptarGraficos(this));
 
 		menuPrincipal.add(this);
 		menuPrincipal.setResizable(false);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 		menuPrincipal.setSize(700, 700);
 		menuPrincipal.repaint();
