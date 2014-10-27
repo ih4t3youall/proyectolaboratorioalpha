@@ -73,6 +73,7 @@ public class PantallaCargando extends JWindow {
 			for (long j = 0; j < 190000; ++j)// modifica el numero segun la
 												// velocidad q desees
 			{
+				String poop = " " + (j + i);
 			}
 			setProgreso("cargando" + i, i); // si quieres q muestre los numeros y un
 									// mensaje
