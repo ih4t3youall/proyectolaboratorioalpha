@@ -27,7 +27,7 @@ import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 
 public class GeneradorGraficos extends JPanel {
-
+	private static final long serialVersionUID = 1L;
 	private String chartTitle;
 
 	private static Color COLOR_SERIE_1 = new Color(255, 128, 64);
@@ -158,8 +158,8 @@ public class GeneradorGraficos extends JPanel {
 			}
 			Producto producto = productosControl.get(0).getProducto();
 
-			XYSeries serieMedidaMaxima= null;
-			XYSeries serieMedidaMinima=null ;
+			XYSeries serieMedidaMaxima = null;
+			XYSeries serieMedidaMinima = null;
 			if (doblePeso) {
 
 				serieMedidaMaxima = new XYSeries("Producto A");

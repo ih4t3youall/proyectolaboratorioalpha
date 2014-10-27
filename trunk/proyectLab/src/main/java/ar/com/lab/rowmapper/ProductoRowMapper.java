@@ -1,6 +1,5 @@
 package ar.com.lab.rowmapper;
 
-import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

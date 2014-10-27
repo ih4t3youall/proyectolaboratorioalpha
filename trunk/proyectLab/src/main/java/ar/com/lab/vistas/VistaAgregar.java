@@ -1,6 +1,5 @@
 package ar.com.lab.vistas;
 
-import java.awt.Checkbox;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +10,6 @@ import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -28,7 +26,7 @@ public class VistaAgregar extends JPanel {
 
 	private MenuPrincipal menuPrincipal = (MenuPrincipal) SpringContext
 			.getContext().getBean("menuPrincipal");
-
+	private static final long serialVersionUID = 1L;
 	// componentes
 	private JTextField nombre = new JTextField(10);
 	private JTextField pesoMax = new JTextField(10);

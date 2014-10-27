@@ -11,6 +11,10 @@ import javax.swing.JProgressBar;
 import javax.swing.JWindow;
 
 public class PantallaCargando extends JWindow {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	BorderLayout borderLayout1 = new BorderLayout();
 	JLabel imageLabel = new JLabel();
 	JPanel southPanel = new JPanel();
@@ -69,7 +73,6 @@ public class PantallaCargando extends JWindow {
 			for (long j = 0; j < 190000; ++j)// modifica el numero segun la
 												// velocidad q desees
 			{
-				String poop = " " + (j + i);
 			}
 			setProgreso("cargando" + i, i); // si quieres q muestre los numeros y un
 									// mensaje

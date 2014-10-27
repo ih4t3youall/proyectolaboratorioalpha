@@ -32,7 +32,7 @@ public class ListenerEliminarProducto implements ActionListener {
 		Producto producto =(Producto)productos.getSelectedItem();
 		productoBO.eliminarProducto(producto);
 		vistaEliminar.refresh();
-		JOptionPane.showMessageDialog(null, "El producto "+producto.getNombre()+" ah sido eliminado exitosamente.");
+		JOptionPane.showMessageDialog(null, "El producto "+producto.getNombre()+" a sido eliminado exitosamente.");
 		
 
 	}

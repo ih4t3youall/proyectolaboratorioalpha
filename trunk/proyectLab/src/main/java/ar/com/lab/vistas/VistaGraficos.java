@@ -1,8 +1,6 @@
 package ar.com.lab.vistas;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -18,11 +16,11 @@ import ar.com.lab.bo.ProductoBO;
 import ar.com.lab.listeners.ListenerAceptarGraficos;
 import ar.com.lab.listeners.ListenerCancelar;
 import ar.com.lab.objetos.Producto;
-import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.spring.SpringContext;
 import ar.com.objetos.Comparador;
 
 public class VistaGraficos extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private MenuPrincipal menuPrincipal = (MenuPrincipal) SpringContext
 			.getContext().getBean("menuPrincipal");
 

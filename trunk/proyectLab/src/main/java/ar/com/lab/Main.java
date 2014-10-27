@@ -1,6 +1,5 @@
 package ar.com.lab;
 
-import javax.swing.JOptionPane;
 
 public class Main {
 

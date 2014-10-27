@@ -3,7 +3,6 @@ package ar.com.lab.dao;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

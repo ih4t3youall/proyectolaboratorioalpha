@@ -22,7 +22,7 @@ import ar.com.lab.spring.SpringContext;
 import ar.com.objetos.Comparador;
 
 public class VistaModificar extends JPanel {
-
+	private static final long serialVersionUID = 1L;
 	private MenuPrincipal menuPrincipal = (MenuPrincipal) SpringContext
 			.getContext().getBean("menuPrincipal");
 	private ProductoBO productoBO = (ProductoBO) SpringContext.getContext()
@@ -172,7 +172,7 @@ public class VistaModificar extends JPanel {
 				productoBO.modificarProductos(productosModificados);
 
 				JOptionPane.showMessageDialog(null,
-						"El producto ah sido modificado");
+						"El producto a sido modificado");
 
 			}
 		});

@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
-import javax.swing.JFrame;
-
 import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.vistas.VistaControlar;
 import ar.com.lab.vistas.VistaModificarProductoControl;

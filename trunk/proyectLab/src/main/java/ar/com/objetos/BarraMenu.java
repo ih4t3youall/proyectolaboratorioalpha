@@ -11,7 +11,7 @@ import ar.com.lab.vistas.MenuPrincipal;
 public class BarraMenu extends JMenuBar {
 
 	
-	
+	private static final long serialVersionUID = 1L;
 	
 	
 	public BarraMenu(MenuPrincipal menuPrincipal){
