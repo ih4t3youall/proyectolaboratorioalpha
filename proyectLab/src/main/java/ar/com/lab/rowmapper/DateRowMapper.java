@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import ar.com.lab.objetos.ProductoControl;
-
 public class DateRowMapper implements RowMapper<Date> {
 
 	@Override

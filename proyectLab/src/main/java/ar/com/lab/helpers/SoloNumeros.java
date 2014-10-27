@@ -5,8 +5,6 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JOptionPane;
 
-import sun.awt.AWTAccessor.KeyEventAccessor;
-
 public class SoloNumeros implements KeyListener {
 
 	

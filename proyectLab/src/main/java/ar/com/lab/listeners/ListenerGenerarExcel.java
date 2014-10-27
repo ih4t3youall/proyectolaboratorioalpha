@@ -1,19 +1,18 @@
 package ar.com.lab.listeners;
 
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -21,9 +20,6 @@ import ar.com.lab.bo.ProductoBO;
 import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.spring.SpringContext;
 import ar.com.lab.vistas.VistaExcel;
-
-import org.apache.poi.ss.usermodel.Row;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class ListenerGenerarExcel implements ActionListener {
 

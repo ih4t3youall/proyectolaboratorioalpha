@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import ar.com.objetos.BarraMenu;
 
 public class MenuPrincipal extends JFrame {
-
+	private static final long serialVersionUID = 1L;
 	
 	public MenuPrincipal(){
 		

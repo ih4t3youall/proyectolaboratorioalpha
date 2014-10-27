@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import ar.com.lab.bo.ProductoBO;
 import ar.com.lab.objetos.Producto;
 import ar.com.lab.spring.SpringContext;
-import ar.com.lab.vistas.MenuPrincipal;
 import ar.com.lab.vistas.VistaAgregar;
 
 public class ListenerFinalizarCarga implements ActionListener {

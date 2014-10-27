@@ -28,6 +28,10 @@ import ar.com.objetos.Comparador;
 
 public class VistaControlar extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private MenuPrincipal menuPrincipal = (MenuPrincipal) SpringContext
 			.getContext().getBean("menuPrincipal");
 	private ProductoBO productoBO = (ProductoBO) SpringContext.getContext()
@@ -130,6 +134,13 @@ public class VistaControlar extends JPanel {
 						labelPeso.repaint();
 						labelMedida.setText("Producto B");
 						labelMedida.repaint();
+						
+					}else {
+						labelPeso.setText("Peso");
+						labelPeso.repaint();
+						labelMedida.setText("Medida");
+						labelMedida.repaint();
+						
 						
 					}
 

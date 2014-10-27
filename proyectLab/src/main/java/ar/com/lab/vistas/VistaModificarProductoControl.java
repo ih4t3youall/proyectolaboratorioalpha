@@ -15,7 +15,7 @@ import ar.com.lab.helpers.SoloNumeros;
 import ar.com.lab.objetos.ProductoControl;
 
 public class VistaModificarProductoControl extends JFrame {
-
+	private static final long serialVersionUID = 1L;
 	private Vector<JTextField> pesos = new Vector<JTextField>();
 	private Vector<JTextField> medidas = new Vector<JTextField>();
 	private JButton aceptar, cancelar;

@@ -13,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import ar.com.lab.listeners.ListenerGenerico;
 import ar.com.objetos.ResultadoCarga;
 
 public class VistaResultadoCarga extends JFrame {
@@ -28,7 +27,7 @@ public class VistaResultadoCarga extends JFrame {
 	public VistaResultadoCarga(ResultadoCarga resultado) {
 
 		aceptar = new JButton("Aceptar");
-		texto = new JTextArea(10, 45);
+		texto = new JTextArea(31, 45);
 
 		setLayout(new FlowLayout());
 
@@ -53,7 +52,7 @@ public class VistaResultadoCarga extends JFrame {
 
 		setResizable(false);
 		setLocation(200, 200);
-		setSize(561, 245);
+		setSize(561, 550);
 		setVisible(true);
 
 		portaPapeles.addActionListener(new ActionListener() {

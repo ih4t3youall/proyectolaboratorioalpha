@@ -22,7 +22,7 @@ public class VistaEliminar extends JPanel {
 	private ProductoBO productoBO = (ProductoBO) SpringContext.getContext()
 			.getBean("productoBO");
 	private JButton eliminar, cancelar;
-
+	private static final long serialVersionUID = 1L;
 	private JComboBox<Producto> productos;
 
 	public VistaEliminar() {

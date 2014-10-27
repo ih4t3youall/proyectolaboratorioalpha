@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -14,7 +13,6 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import ar.com.lab.bo.ProductoBO;
 import ar.com.lab.exceptions.CampoInvalidoExeption;
-import ar.com.lab.objetos.Producto;
 import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.spring.SpringContext;
 import ar.com.lab.vistas.GeneradorGraficos;
@@ -65,7 +63,6 @@ public class ListenerAceptarGraficos implements ActionListener {
 						.getProducto().getPesoMax();
 
 				XYSeriesCollection generarDatasetProyectedValues = null;
-				ChartPanel grafica = null;
 				JPanel panel = new JPanel();
 				if (pesoMax == 0 && medMax != 0) {
 					// solo med

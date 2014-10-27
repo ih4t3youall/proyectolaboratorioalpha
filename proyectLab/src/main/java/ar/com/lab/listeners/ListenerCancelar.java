@@ -2,12 +2,10 @@ package ar.com.lab.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import ar.com.lab.objetos.ProductoControl;
 import ar.com.lab.spring.SpringContext;
 import ar.com.lab.vistas.MenuPrincipal;
 import ar.com.lab.vistas.VistaAgregar;
