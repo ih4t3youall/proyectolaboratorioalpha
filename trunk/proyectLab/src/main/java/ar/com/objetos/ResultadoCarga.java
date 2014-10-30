@@ -134,7 +134,6 @@ public class ResultadoCarga {
 		String respuesta = "";
 		DecimalFormat df = new DecimalFormat("0.00");
 		if (!doblePeso) {
-			respuesta += "Nombre Producto: " + nombreProducto + "\n\n";
 			double errorAuxPeso = errorPeso * 100;
 			double errorAuxMedida = errorMedida * 100;
 
@@ -142,14 +141,16 @@ public class ResultadoCarga {
 			Double TasaErrorMedida = errorAuxMedida / cantidadDeMuestras;
 			String formatErrorMedida = df.format(TasaErrorMedida);
 			String formatErrorPeso = df.format(TasaErrorPeso);
+
+			respuesta += "Nombre Producto: " + nombreProducto + "\n\n";
+
 			if (pesoMaximoEstablecido != 0) {
 				respuesta += "Peso minimo establecido: "
 						+ pesoMinimoEstablecido + "\n\n";
-				respuesta += "El peso maximo establecido: "
+				respuesta += "Peso maximo establecido: "
 						+ pesoMaximoEstablecido + "\n\n";
 
-				respuesta += "Diferencia peso: "
-						+ df.format(pesoMaximo - pesoMinimo) + "\n\n";
+
 			}
 
 			if (medidaMinimoEstablecido != 0) {
@@ -157,34 +158,40 @@ public class ResultadoCarga {
 						+ medidaMinimoEstablecido + "\n\n";
 				respuesta += "La medida maxima establecida: "
 						+ medidaMaximoEstablecido + "\n\n";
-				respuesta += "Diferencia entre la medida maxima y el minima es de: "
-						+ df.format(medidaMaxima - medidaMinima) + "\n\n";
+
 			}
-			if (medidaMaxima > 0) {
-				respuesta += "Tasa de error de las medidas fue de un: "
-						+ formatErrorMedida + "% \n\n";
-			}
+
 			respuesta += "Muestras registradas:" + cantidadDeMuestras + " \n\n";
 
 			if (pesoMaximo > 0) {
 
 				respuesta += "Peso minimo registrado:" + pesoMinimo + "\n\n";
 				respuesta += "Peso maximo registrado:" + pesoMaximo + "\n\n";
-
+				respuesta += "Diferencia peso: "
+				+ df.format(pesoMaximo - pesoMinimo) + "\n\n";
 			}
+			
+			if (pesoMaximo > 0) {
+				respuesta += "Tasa de error de los pesos fue de un: "
+						+ formatErrorPeso + "% \n\n";
+			}
+			
 
 			if (medidaMaxima > 0) {
 				respuesta += "Medida minima registrada:" + medidaMinima
 						+ "\n\n";
 				respuesta += "Medida maxima registrada:" + medidaMaxima
 						+ "\n\n";
+				respuesta += "Diferencia entre la medida maxima y el minima es de: "
+				+ df.format(medidaMaxima - medidaMinima) + "\n\n";
 
 			}
-
-			if (pesoMaximo > 0) {
-				respuesta += "Tasa de error de los pesos fue de un: "
-						+ formatErrorPeso + "% \n\n";
+			if (medidaMaxima > 0) {
+				respuesta += "Tasa de error de las medidas fue de un: "
+						+ formatErrorMedida + "% \n\n";
 			}
+
+			
 
 		} else {
 
